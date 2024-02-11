@@ -12,10 +12,13 @@ public class Camera_Controls : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 15f;
     private float cameraVerticalRotation = 0f;
 
+    private bool lockedCursor = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
