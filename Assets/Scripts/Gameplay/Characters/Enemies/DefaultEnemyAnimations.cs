@@ -14,6 +14,7 @@ public class DefaultEnemyAnimations : MonoBehaviour {
     private float distanceFromTarget;
     private float enemyAttackRange;
     private Vector3 previousPosition;
+    private bool isAlive = true;
 
     private IGameManager gameManager;
     private IStatsManager statsManager;
@@ -38,10 +39,12 @@ public class DefaultEnemyAnimations : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        isAlive = GetComponent<Enemy>().health > 0;
+
         if (target) {
             distanceFromTarget = (float)Math.Sqrt(Math.Pow(target.transform.position.x - transform.position.x, 2) + Math.Pow(target.transform.position.z - transform.position.z, 2));
 
-            if (distanceFromTarget <= enemyAttackRange) {
+            if (distanceFromTarget <= enemyAttackRange && isAlive) {
                 animator.SetFloat("Speed_f", 0);
                 animator.SetInteger("WeaponType_int", 12);
                 animator.SetInteger("MeleeType_int", 1);
