@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player_Weapon") {
             activeSkin.GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
-            StartCoroutine(ChangeColorBack(0.1f));
+            StartCoroutine(ChangeColorBack(0.2f));
             health -= gameManager.player.GetComponent<Player>().activeWeapon.damage;
             if (health <= 0) {
                 animator.SetBool("Death_b", true);

@@ -19,9 +19,10 @@ public class Player : MonoBehaviour
         statsManager = ServiceLocator.Resolve<IStatsManager>();
 
         activeWeapon = new Weapon {
+            name = "Human_Sword_Long",
             damage = 2.5f,
             attackRange = 1.5f,
-            name = "Human_Sword_Medium"
+            weaponType = "Melee_OneHanded",
         };
     }
 

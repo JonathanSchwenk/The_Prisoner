@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dorkbots.ServiceLocatorTools;
 
 public class Player_Actions : MonoBehaviour {
     [SerializeField] private Animator animator;
 
 
+    private GameManager gameManager;
+
+
     // Start is called before the first frame update
     void Start() {
-
+        gameManager = ServiceLocator.Resolve<IGameManager>() as GameManager;
     }
 
     void Update() {
@@ -21,9 +25,22 @@ public class Player_Actions : MonoBehaviour {
 
     private void Attack() {
         // Trigger attack animation or logic
-        animator.SetInteger("WeaponType_int", 12);
-        animator.SetInteger("MeleeType_int", 1);
-        StartCoroutine(StopAnimation(0.8f));
+        if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Melee_OneHanded") {
+            // For one handed melee weapons
+            animator.SetInteger("WeaponType_int", 12);
+            animator.SetInteger("MeleeType_int", 1);
+            StartCoroutine(StopAnimation(0.8f));
+        } else if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Melee_TwoHanded") {
+            // For two handed melee weapons
+            animator.SetInteger("WeaponType_int", 12);
+            animator.SetInteger("MeleeType_int", 2);
+            StartCoroutine(StopAnimation(0.8f));
+        } else if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Melee_Stab") {
+            // For stabbing melee weapons
+            animator.SetInteger("WeaponType_int", 12);
+            animator.SetInteger("MeleeType_int", 0);
+            StartCoroutine(StopAnimation(0.8f));
+        }
     }
 
     IEnumerator StopAnimation(float time) {
