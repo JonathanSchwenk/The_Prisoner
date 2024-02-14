@@ -7,13 +7,13 @@ public class GameManager : MonoBehaviour, IGameManager
 {
     public GameState State {get; set;}
     public Action<GameState> OnGameStateChanged {get; set;}
+    public GameObject player {get; set;}
+
+    [SerializeField] GameObject playerLocal;
 
 
     private ISaveManager saveManager;
     private IAudioManager audioManager;
-
-
-
 
 
     void OnDestroy() {
@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour, IGameManager
     void Start() {
         saveManager = ServiceLocator.Resolve<ISaveManager>();
         audioManager = ServiceLocator.Resolve<IAudioManager>();
+
+        player = playerLocal;
     }
 
     // For next game, control more with this game managers state machine to keep everything in one spot

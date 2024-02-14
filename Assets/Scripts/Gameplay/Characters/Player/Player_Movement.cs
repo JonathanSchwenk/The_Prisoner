@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Dorkbots.ServiceLocatorTools;
 using UnityEngine;
 
 public class Player_Movement : MonoBehaviour {
-
-    [SerializeField] private float speed;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform cameraTransform;
 
+    private IStatsManager statsManager;
+
     // Start is called before the first frame update
     void Start() {
-
+        statsManager = ServiceLocator.Resolve<IStatsManager>();
     }
 
     // Update is called once per frame
@@ -47,13 +48,13 @@ public class Player_Movement : MonoBehaviour {
         moveDirection = moveDirection.normalized;
 
         // Calculate the speed value
-        float speedValue = moveDirection.magnitude * speed;
+        float speedValue = moveDirection.magnitude * statsManager.playerSpeed;
 
         // Set the speed_f parameter in the Animator
         // animator.SetFloat("Speed_f", speedValue);
 
         if (moveDirection != Vector3.zero) {
-            transform.position += moveDirection * speed * Time.deltaTime;
+            transform.position += moveDirection * statsManager.playerSpeed * Time.deltaTime;
         }
     }
 }

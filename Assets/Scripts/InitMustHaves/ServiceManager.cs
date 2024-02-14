@@ -8,6 +8,8 @@ public class ServiceManager : MonoBehaviour
     
     public SaveManager saveManager;
     public AudioManager audioManager;
+    public GameManager gameManager;
+    public StatsManager statsManager;
     
 
 
@@ -33,6 +35,18 @@ public class ServiceManager : MonoBehaviour
             ServiceLocator.Register<IAudioManager>(audioManager);
         }
 
+
+        if (ServiceLocator.IsRegistered<IGameManager>()) {
+            //Debug.Log("An gameManager already exists");
+        } else {
+            //Debug.Log("gameManager not found, creating one");
+            ServiceLocator.Register<IGameManager>(gameManager);
+        }
+
+        if (!ServiceLocator.IsRegistered<IStatsManager>()) {
+            ServiceLocator.Register<IStatsManager>(statsManager);
+        }
+
     }
 
 
@@ -46,6 +60,12 @@ public class ServiceManager : MonoBehaviour
         }
         if (ServiceLocator.IsRegistered<IAudioManager>()) {
             ServiceLocator.Unregister<IAudioManager>();
+        }
+        if (ServiceLocator.IsRegistered<IGameManager>()) {
+            ServiceLocator.Unregister<IGameManager>();
+        }
+        if (ServiceLocator.IsRegistered<IStatsManager>()) {
+            ServiceLocator.Unregister<IStatsManager>();
         }
     }
     

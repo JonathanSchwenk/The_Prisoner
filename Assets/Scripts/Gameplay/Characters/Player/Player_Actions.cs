@@ -26,7 +26,6 @@ public class Player_Actions : MonoBehaviour {
         StartCoroutine(StopAnimation(0.8f));
     }
 
-    // StartCoroutine(KnifeDamageCollider());
     IEnumerator StopAnimation(float time) {
         yield return new WaitForSeconds(time);
         animator.SetInteger("WeaponType_int", 0);

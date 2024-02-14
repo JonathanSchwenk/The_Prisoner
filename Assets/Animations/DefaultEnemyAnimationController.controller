@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerAnimationController
+  m_Name: DefaultEnemyAnimationController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Speed_f
@@ -9926,7 +9926,7 @@ AnimatorStateMachine:
     m_Position: {x: 144, y: -48, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110250891}
-    m_Position: {x: -340, y: -210, z: 0}
+    m_Position: {x: -336, y: -192, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110246782}
     m_Position: {x: -336, y: -48, z: 0}
@@ -9941,7 +9941,7 @@ AnimatorStateMachine:
     m_Position: {x: 324, y: -360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110240064}
-    m_Position: {x: 320, y: -430, z: 0}
+    m_Position: {x: 324, y: -432, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110207262}
     m_Position: {x: 216, y: -504, z: 0}

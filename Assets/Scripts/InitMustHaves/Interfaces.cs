@@ -6,6 +6,7 @@ using System;
 public interface IGameManager {
     GameState State {get; set;}
     void UpdateGameState(GameState state);
+    GameObject player {get; set;}
 }
 
 public interface IObjectPooler {
@@ -34,4 +35,10 @@ public interface IAudioManager {
 
 public interface IAdManager {
     void LoadRewardedAd();
+}
+
+public interface IStatsManager {
+    float enemySpeed {get; set;}
+    float playerSpeed {get; set;}
+    float enemyAttackRange {get; set;}
 }
