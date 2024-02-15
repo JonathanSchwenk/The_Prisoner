@@ -5,6 +5,7 @@ using System;
 
 public interface IGameManager {
     GameState State {get; set;}
+    Action<GameState> OnGameStateChanged {get; set;}
     void UpdateGameState(GameState state);
     GameObject player {get; set;}
 }

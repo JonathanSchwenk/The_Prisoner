@@ -4,9 +4,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Dorkbots.ServiceLocatorTools;
 
-public class Player_Weapons {
-    Dictionary<string, Weapon> Player_Weapons_Dic = new Dictionary<string, Weapon> {
+public class Player_Weapons : MonoBehaviour {
+
+    [HideInInspector]
+    public Dictionary<string, Weapon> playerWeaponsDict;
+
+    void Start()
+    {
+        playerWeaponsDict = new Dictionary<string, Weapon>
         {
+            {
             "Human_Sword_Long",
             new Weapon
             {
@@ -176,6 +183,7 @@ public class Player_Weapons {
                 weaponType = "Melee_OneHanded"
             }
         },
-    };
+        };
+    }
 
 }
