@@ -22,11 +22,17 @@ public class UIManager : MonoBehaviour {
     }
     private void GameManagerOnGameStateChanged(GameState state) {
         if (state == GameState.Playing) {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
             Time.timeScale = 1;
             pauseCanvas.SetActive(false);
             gameOverCanvas.SetActive(false);
             gameplayCanvas.SetActive(true);
         } else if (state == GameState.Idle) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            
             Time.timeScale = 0;
             pauseCanvas.SetActive(true);
             gameOverCanvas.SetActive(false);
@@ -47,9 +53,9 @@ public class UIManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            if (gameManager.State == GameState.Playing)
+            if (gameManager.State == GameState.Playing) {
                 gameManager.UpdateGameState(GameState.Idle);
-            else if (gameManager.State == GameState.Idle) {
+            } else if (gameManager.State == GameState.Idle) {
                 gameManager.UpdateGameState(GameState.Playing);
             }
         }

@@ -5,7 +5,8 @@ using Dorkbots.ServiceLocatorTools;
 
 public class Player : MonoBehaviour
 {
-
+    [SerializeField] private Player_Weapons weaponDictionary;
+    [SerializeField] private GameObject playerWeaponList;
 
     private IStatsManager statsManager;
 
@@ -18,18 +19,20 @@ public class Player : MonoBehaviour
     {
         statsManager = ServiceLocator.Resolve<IStatsManager>();
 
-        activeWeapon = new Weapon {
-            name = "Human_Sword_Long",
-            damage = 2.5f,
-            attackRange = 1.5f,
-            weaponType = "Melee_OneHanded",
-        };
+        activeWeapon = weaponDictionary.playerWeaponsDict["Long Sword"];
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Bad practice and I should make an action for this subscribed to when the active weapon changes
+        for (int i = 0; i < playerWeaponList.transform.childCount; i++) {
+            if (playerWeaponList.transform.GetChild(i).name == activeWeapon.name) {
+                playerWeaponList.transform.GetChild(i).gameObject.SetActive(true);
+            } else {
+                playerWeaponList.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other) {

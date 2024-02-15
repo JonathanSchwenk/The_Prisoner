@@ -14,63 +14,63 @@ public class Player_Weapons : MonoBehaviour {
         playerWeaponsDict = new Dictionary<string, Weapon>
         {
             {
-            "Human_Sword_Long",
+            "Long Sword",
             new Weapon
             {
-                name = "Human_Sword_Long",
+                name = "Long Sword",
                 damage = 2.5f,
                 attackRange = 1.5f,
-                weaponType = "Melee_OneHanded",
+                weaponType = "One Handed",
             }
         },
         {
-            "Human_Dagger",
+            "Dagger",
             new Weapon
             {
-                name = "Human_Dagger",
+                name = "Dagger",
                 damage = 2f,
                 attackRange = 1f,
-                weaponType = "Melee_Stab"
+                weaponType = "Stab"
             }
         },
         {
-            "Human_Lance",
+            "Lance",
             new Weapon
             {
-                name = "Human_Lance",
+                name = "Lance",
                 damage = 3f,
                 attackRange = 3f,
-                weaponType = "Melee_TwoHanded"
+                weaponType = "Stab"
             }
         },
         {
-            "Human_Hammer",
+            "Hammer",
             new Weapon
             {
-                name = "Human_Hammer",
+                name = "Hammer",
                 damage = 3,
                 attackRange = 2f,
-                weaponType = "Melee_TwoHanded"
+                weaponType = "Two Handed"
             }
         },
         {
-            "Human_Greatsword",
+            "Greatsword",
             new Weapon
             {
-                name = "Human_Greatsword",
+                name = "Greatsword",
                 damage = 3f,
                 attackRange = 2.5f,
-                weaponType = "Melee_TwoHanded"
+                weaponType = "Two Handed"
             }
         },
         {
-            "Human_Haldberd",
+            "Haldberd",
             new Weapon
             {
-                name = "Human_Haldberd",
+                name = "Haldberd",
                 damage = 2.5f,
                 attackRange = 3f,
-                weaponType = "Melee_TwoHanded"
+                weaponType = "Two Handed"
             }
         },
         {
@@ -80,27 +80,27 @@ public class Player_Weapons : MonoBehaviour {
                 name = "GreatAxe",
                 damage = 4f,
                 attackRange = 3.5f,
-                weaponType = "Melee_TwoHanded"
+                weaponType = "Two Handed"
             }
         },
         {
-            "Doublesword",
+            "Double Sword",
             new Weapon
             {
-                name = "Doublesword",
+                name = "Double Sword",
                 damage = 4f,
                 attackRange = 2f,
-                weaponType = "Melee_OnwHanded"
+                weaponType = "One Handed"
             }
         },
         {
-            "BlackSword",
+            "Black Sword",
             new Weapon
             {
-                name = "BlackSword",
+                name = "Black Sword",
                 damage = 5f,
                 attackRange = 2f,
-                weaponType = "Melee_OneHanded"
+                weaponType = "One Handed"
             }
         },
         {
@@ -110,27 +110,27 @@ public class Player_Weapons : MonoBehaviour {
                 name = "Claws",
                 damage = 5f,
                 attackRange = 1f,
-                weaponType = "Melee_Stab"
+                weaponType = "Stab"
             }
         },
         {
-            "StoneGreatsword",
+            "Stone Greatsword",
             new Weapon
             {
-                name = "StoneGreatsword",
+                name = "Stone Greatsword",
                 damage = 3f,
                 attackRange = 3f,
-                weaponType = "Melee_TwoHanded"
+                weaponType = "Two Handed"
             }
         },
         {
-            "SplitBlade",
+            "Split Blade",
             new Weapon
             {
-                name = "SplitBlade",
+                name = "Split Blade",
                 damage = 5f,
                 attackRange = 2f,
-                weaponType = "Melee_OneHanded"
+                weaponType = "One Handed"
             }
         },
         {
@@ -140,7 +140,7 @@ public class Player_Weapons : MonoBehaviour {
                 name = "Scythe",
                 damage = 3,
                 attackRange = 3f,
-                weaponType = "Melee_TwoHanded"
+                weaponType = "Two Handed"
             }
         },
         {
@@ -150,27 +150,27 @@ public class Player_Weapons : MonoBehaviour {
                 name = "Rapier",
                 damage = 5f,
                 attackRange = 2f,
-                weaponType = "Melee_Stab"
+                weaponType = "Stab"
             }
         },
         {
-            "Human_Zweihander",
+            "Zweihander",
             new Weapon
             {
-                name = "Human_Zweihander",
+                name = "Zweihander",
                 damage = 5f,
                 attackRange = 3f,
-                weaponType = "Melee_TwoHanded"
+                weaponType = "Two Handed"
             }
         },
         {
-            "Human_Spear",
+            "Spear",
             new Weapon
             {
-                name = "Human_Spear",
+                name = "Spear",
                 damage = 2.5f,
                 attackRange = 4f,
-                weaponType = "Melee_Stab"
+                weaponType = "Stab"
             }
         },
         {
@@ -180,7 +180,7 @@ public class Player_Weapons : MonoBehaviour {
                 name = "Katana",
                 damage = 3.5f,
                 attackRange = 2f,
-                weaponType = "Melee_OneHanded"
+                weaponType = "One Handed"
             }
         },
         };

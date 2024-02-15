@@ -25,17 +25,17 @@ public class Player_Actions : MonoBehaviour {
 
     private void Attack() {
         // Trigger attack animation or logic
-        if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Melee_OneHanded") {
+        if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "One Handed") {
             // For one handed melee weapons
             animator.SetInteger("WeaponType_int", 12);
             animator.SetInteger("MeleeType_int", 1);
             StartCoroutine(StopAnimation(0.8f));
-        } else if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Melee_TwoHanded") {
+        } else if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Two Handed") {
             // For two handed melee weapons
             animator.SetInteger("WeaponType_int", 12);
             animator.SetInteger("MeleeType_int", 2);
             StartCoroutine(StopAnimation(0.8f));
-        } else if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Melee_Stab") {
+        } else if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Stab") {
             // For stabbing melee weapons
             animator.SetInteger("WeaponType_int", 12);
             animator.SetInteger("MeleeType_int", 0);
