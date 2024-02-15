@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
         }
 
-        enemyToSpawn = "Goblin_TwoHanded";
+        enemyToSpawn = "Goblin_OneHanded";
 
         numEnemies = 0;
         bankValue = gameManager.RoundNum * 10;
