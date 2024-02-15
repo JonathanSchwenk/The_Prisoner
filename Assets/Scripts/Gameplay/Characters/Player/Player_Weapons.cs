@@ -9,7 +9,7 @@ public class Player_Weapons : MonoBehaviour {
     [HideInInspector]
     public Dictionary<string, Weapon> playerWeaponsDict;
 
-    void Start()
+    void Awake()
     {
         playerWeaponsDict = new Dictionary<string, Weapon>
         {

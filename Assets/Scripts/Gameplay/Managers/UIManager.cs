@@ -20,6 +20,12 @@ public class UIManager : MonoBehaviour {
 
         }
     }
+
+    void OnDestroy() {
+        gameManager.OnGameStateChanged -= GameManagerOnGameStateChanged;
+    }
+
+    
     private void GameManagerOnGameStateChanged(GameState state) {
         if (state == GameState.Playing) {
             Cursor.visible = false;

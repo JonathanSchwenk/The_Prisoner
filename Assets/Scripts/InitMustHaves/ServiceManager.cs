@@ -10,6 +10,8 @@ public class ServiceManager : MonoBehaviour
     public AudioManager audioManager;
     public GameManager gameManager;
     public StatsManager statsManager;
+    public SpawnManager spawnManager;
+    public ObjectPooler objectPooler;
     
 
 
@@ -47,6 +49,13 @@ public class ServiceManager : MonoBehaviour
             ServiceLocator.Register<IStatsManager>(statsManager);
         }
 
+        if (!ServiceLocator.IsRegistered<ISpawnManager>()) {
+            ServiceLocator.Register<ISpawnManager>(spawnManager);
+        }
+        if (!ServiceLocator.IsRegistered<IObjectPooler>()) {
+            ServiceLocator.Register<IObjectPooler>(objectPooler);
+        }
+
     }
 
 
@@ -66,6 +75,12 @@ public class ServiceManager : MonoBehaviour
         }
         if (ServiceLocator.IsRegistered<IStatsManager>()) {
             ServiceLocator.Unregister<IStatsManager>();
+        }
+        if (ServiceLocator.IsRegistered<ISpawnManager>()) {
+            ServiceLocator.Unregister<ISpawnManager>();
+        }
+        if (ServiceLocator.IsRegistered<IObjectPooler>()) {
+            ServiceLocator.Unregister<IObjectPooler>();
         }
     }
     

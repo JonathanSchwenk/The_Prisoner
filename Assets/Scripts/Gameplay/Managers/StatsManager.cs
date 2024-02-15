@@ -17,7 +17,7 @@ public class StatsManager : MonoBehaviour, IStatsManager
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         enemySpeed = enemySpeedLocal;
         playerSpeed = playerSpeedLocal;

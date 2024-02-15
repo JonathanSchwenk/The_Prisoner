@@ -6,8 +6,10 @@ using System;
 public interface IGameManager {
     GameState State {get; set;}
     Action<GameState> OnGameStateChanged {get; set;}
+    Action<int> OnRoundChanged {get; set;}
     void UpdateGameState(GameState state);
     GameObject player {get; set;}
+    int RoundNum {get; set;}
 }
 
 public interface IObjectPooler {
@@ -42,4 +44,11 @@ public interface IStatsManager {
     float enemySpeed {get; set;}
     float playerSpeed {get; set;}
     float enemyAttackRange {get; set;}
+}
+
+public interface ISpawnManager {
+    string enemyToSpawn {get; set;}
+    int numEnemies {get; set;}
+    int bankValue {get; set;}
+    bool canSpawn {get; set;}
 }

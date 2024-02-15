@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour, IGameManager
 {
     public GameState State {get; set;}
     public Action<GameState> OnGameStateChanged {get; set;}
+    public Action<int> OnRoundChanged {get; set;}
     public GameObject player {get; set;}
+    public int RoundNum {get; set;}
 
     [SerializeField] GameObject playerLocal;
 
@@ -21,13 +23,16 @@ public class GameManager : MonoBehaviour, IGameManager
     }
 
     // Sets the state to ready when the game starts 
-    void Start() {
+    void Awake() {
         saveManager = ServiceLocator.Resolve<ISaveManager>();
         audioManager = ServiceLocator.Resolve<IAudioManager>();
 
         player = playerLocal;
 
         UpdateGameState(GameState.Playing);
+
+        RoundNum = 0; // 0 for survival
+        UpdateRound();
     }
 
     // For next game, control more with this game managers state machine to keep everything in one spot
@@ -56,6 +61,11 @@ public class GameManager : MonoBehaviour, IGameManager
         // Null checker then calls the action for anthing subscribed to it
         OnGameStateChanged?.Invoke(newState);
     } 
+
+    public void UpdateRound() {
+        RoundNum += 1;
+        OnRoundChanged?.Invoke(RoundNum);
+    }
 
 
 }
