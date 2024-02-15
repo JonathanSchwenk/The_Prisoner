@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour, IGameManager
                 
                 break;
             case GameState.Playing:
-                
+
                 break;
             case GameState.GameOver:
 

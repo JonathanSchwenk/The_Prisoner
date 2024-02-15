@@ -49,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
             } else {
                 enemy = objectPooler.SpawnFromPool("Goblin_Warrior", transform.position, Quaternion.identity);
             }
-            enemy.GetComponent<Animator>().SetInteger("WeaponType_int", 1);
+            enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
         } else if (spawnManager.enemyToSpawn == "Goblin_TwoHanded") {
             int enemyToSpawn = Random.Range(0, 2);
             if (enemyToSpawn == 0) {
@@ -57,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
             } else {
                 enemy = objectPooler.SpawnFromPool("Goblin_WitchDoctor", transform.position, Quaternion.identity);
             }
-            enemy.GetComponent<Animator>().SetInteger("WeaponType_int", 2);
+            enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
         } else if (spawnManager.enemyToSpawn == "Goblin_Stab") {
             int enemyToSpawn = Random.Range(0, 2);
             if (enemyToSpawn == 0) {
@@ -65,8 +65,9 @@ public class EnemySpawner : MonoBehaviour
             } else {
                 enemy = objectPooler.SpawnFromPool("Goblin_Hunter", transform.position, Quaternion.identity);
             }
-            enemy.GetComponent<Animator>().SetInteger("WeaponType_int", 0);
+            enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Stab";
         }
+        print("Enemy spawned: " + spawnManager.enemyToSpawn);
         spawnManager.numEnemies += 1;
         spawnManager.bankValue -= 1;
     }

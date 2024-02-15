@@ -10,6 +10,8 @@ public class DefaultEnemyAnimations : MonoBehaviour {
     [SerializeField] private Animator animator;
     [SerializeField] private NavMeshAgent agent;
 
+    [HideInInspector] public string enemyType;
+
     private GameObject target;
     private float distanceFromTarget;
     private float enemyAttackRange;
@@ -47,7 +49,13 @@ public class DefaultEnemyAnimations : MonoBehaviour {
             if (distanceFromTarget <= enemyAttackRange && isAlive) {
                 animator.SetFloat("Speed_f", 0);
                 animator.SetInteger("WeaponType_int", 12);
-                animator.SetInteger("MeleeType_int", 1);
+                if (enemyType == "One Handed") {
+                    animator.SetInteger("MeleeType_int", 1);
+                } else if (enemyType == "Two Handed") {
+                    animator.SetInteger("MeleeType_int", 2);
+                } else if (enemyType == "Stab") {
+                    animator.SetInteger("MeleeType_int", 0);
+                }
                 StartCoroutine(StopAnimation(0.8f));
             } else {
                 // Calculate the movement direction

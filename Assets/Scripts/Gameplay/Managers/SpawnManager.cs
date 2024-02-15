@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
     private IGameManager gameManager;
 
-    void Awake() {
+    void Start() {
         gameManager = ServiceLocator.Resolve<IGameManager>();
 
         // Subscribes to gamemanagers actions
@@ -24,7 +24,10 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
         }
 
-        enemyToSpawn = "Goblin_OneHanded";
+        enemyToSpawn = "Goblin_TwoHanded";
+
+        numEnemies = 0;
+        bankValue = gameManager.RoundNum * 10;
     }
 
     void OnDestroy() {
@@ -49,15 +52,14 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // enemyToSpawn = "Goblin_OneHanded";
-    }
-
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.State == GameState.Playing) {
+            canSpawn = true;
+        } else {
+            canSpawn = false;
+        }
         if (bankValue == 0 & numEnemies == 0) {
             // print("round over");
             // Trigger doors and new round
