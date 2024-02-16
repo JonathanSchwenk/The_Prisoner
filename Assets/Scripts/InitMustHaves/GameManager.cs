@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour, IGameManager {
     // For next game, control more with this game managers state machine to keep everything in one spot
     // Update game state function
     public void UpdateGameState(GameState newState) {
-        print("New Game State: " + newState);
         State = newState;
 
         // Swtich statement that deals with each possible state 

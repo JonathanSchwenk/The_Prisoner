@@ -7,13 +7,13 @@ public class StatsManager : MonoBehaviour, IStatsManager {
     [SerializeField] float enemySpeedLocal;
     [SerializeField] float playerSpeedLocal;
     [SerializeField] float enemyAttackRangeLocal;
-
-    [SerializeField] Player_Weapons weaponDictionary;
+    [SerializeField] float enemyAttackDamageLocal;
 
 
     public float enemySpeed { get; set; }
     public float playerSpeed { get; set; }
     public float enemyAttackRange { get; set; }
+    public float enemyAttackDamage { get; set; }
     public Dictionary<string, Weapon> playerUnlockedWeapons { get; set; }
 
     // enemy health for each enemy type
@@ -24,6 +24,7 @@ public class StatsManager : MonoBehaviour, IStatsManager {
         enemySpeed = enemySpeedLocal;
         playerSpeed = playerSpeedLocal;
         enemyAttackRange = enemyAttackRangeLocal;
+        enemyAttackDamage = enemyAttackDamageLocal;
 
         playerUnlockedWeapons = new Dictionary<string, Weapon> {
             {

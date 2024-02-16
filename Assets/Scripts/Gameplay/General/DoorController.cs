@@ -9,7 +9,6 @@ public class DoorController : MonoBehaviour
     [SerializeField] private GameObject rightDoor;
 
     public bool openingDoor = false;
-    public bool hasMoved = false;
 
     private Vector3 leftDoorPos;
     private Vector3 rightDoorPos;

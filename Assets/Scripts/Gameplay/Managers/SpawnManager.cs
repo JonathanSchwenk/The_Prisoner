@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
     private int bankCap = 20; // Max enemies for a level 
     private int mutliplier = 2;
+    private bool roundUpdated = false;
 
     private IGameManager gameManager;
 
@@ -43,6 +44,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
         if (bankValue > bankCap) {
             bankValue = bankCap;
         }
+        roundUpdated = false;
     }
 
     private void GameManagerOnGameStateChanged(GameState state) { 
@@ -61,9 +63,18 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
         } else {
             canSpawn = false;
         }
-        if (bankValue == 0 & numEnemies == 0) {
-            print("round over");
-            // Trigger doors and new round
+        if (bankValue == 0 && numEnemies == 0) {
+            if (!roundUpdated) {
+                roundUpdated = true;
+                StartCoroutine(ChangeState(5.0f));
+            }
         }
+    }
+
+    IEnumerator ChangeState(float time) {
+        yield return new WaitForSeconds(time);
+        gameManager.UpdateGameState(GameState.Doors);
+        gameManager.UpdateRound();
+        gameManager.player.GetComponent<Player>().health = gameManager.player.GetComponent<Player>().maxHealth;
     }
 }

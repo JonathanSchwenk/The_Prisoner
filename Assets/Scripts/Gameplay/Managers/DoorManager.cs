@@ -59,10 +59,9 @@ public class DoorManager : MonoBehaviour, IDoorManager {
                     // print(selectedDoor);
                     if (selectedDoor.GetComponent<DoorController>() != null) {
                         ActivateDoorSpawners();
-                        
+
                         selectedDoor.GetComponent<DoorController>().openingDoor = true;
                         selectedDoor.GetComponent<DoorController>().StopDoors();
-                        selectedDoor.GetComponent<DoorController>().hasMoved = true;
 
                         numTimesOpened++;
 
@@ -142,9 +141,9 @@ public class DoorManager : MonoBehaviour, IDoorManager {
         }
     }
 
-     public void SelectButton() {
+    public void SelectButton() {
         chosenObject = doorContents[selectedDoorIndex];
-        print(chosenObject);
+        // print(chosenObject);
         canOpenDoor = true;
 
         // Reset doors canvas
@@ -162,11 +161,8 @@ public class DoorManager : MonoBehaviour, IDoorManager {
 
         // Need to reset doors to be shut and despawn the enemies
         foreach (GameObject door in doorParentList) {
-            if (door.GetComponent<DoorController>().hasMoved == true) {
-                door.GetComponent<DoorController>().CloseDoors();
-                door.GetComponent<DoorController>().openingDoor = false;
-                door.GetComponent<DoorController>().hasMoved = false;
-            }
+            door.GetComponent<DoorController>().CloseDoors();
+            door.GetComponent<DoorController>().openingDoor = false;
         }
 
         // Resets enemies
@@ -175,20 +171,42 @@ public class DoorManager : MonoBehaviour, IDoorManager {
         }
         hasSpawned = false;
 
-        // Tell the game manager to update the game state
-        gameManager.UpdateGameState(GameState.Playing);
 
         // Change enemiesToSpawn in spawnManager to chosenObject
-        if (chosenObject == "HumansDoor")
+        if (chosenObject == "HumansDoor") {
             spawnManager.enemyToSpawn = "Humans";
-        else if (chosenObject == "ElfDoor")
+
+            // Reset player position
+            gameManager.player.transform.position = new Vector3(0, 0, 0);
+            // Tell the game manager to update the game state
+            gameManager.UpdateGameState(GameState.Playing);
+        } else if (chosenObject == "ElfDoor") {
             spawnManager.enemyToSpawn = "Elves";
-        else if (chosenObject == "GoblinsDoor")
+
+            // Reset player position
+            gameManager.player.transform.position = new Vector3(0, 0, 0);
+            // Tell the game manager to update the game state
+            gameManager.UpdateGameState(GameState.Playing);
+        } else if (chosenObject == "GoblinsDoor") {
             spawnManager.enemyToSpawn = "Goblins";
-        else if (chosenObject == "UndeadDoor")
+
+            // Reset player position
+            gameManager.player.transform.position = new Vector3(0, 0, 0);
+            // Tell the game manager to update the game state
+            gameManager.UpdateGameState(GameState.Playing);
+        } else if (chosenObject == "UndeadDoor") {
             spawnManager.enemyToSpawn = "Undead";
-        else {
-            statsManager.playerUnlockedWeapons.Add(weaponDictionary.playerWeaponsDict[chosenObject].name, weaponDictionary.playerWeaponsDict[chosenObject]);
+
+            // Reset player position
+            gameManager.player.transform.position = new Vector3(0, 0, 0);
+            // Tell the game manager to update the game state
+            gameManager.UpdateGameState(GameState.Playing);
+        } else {
+            if (!statsManager.playerUnlockedWeapons.ContainsKey(weaponDictionary.playerWeaponsDict[chosenObject].name)) {
+                statsManager.playerUnlockedWeapons.Add(weaponDictionary.playerWeaponsDict[chosenObject].name, weaponDictionary.playerWeaponsDict[chosenObject]);
+            }
+
+            // Could increase round number
         }
 
     }

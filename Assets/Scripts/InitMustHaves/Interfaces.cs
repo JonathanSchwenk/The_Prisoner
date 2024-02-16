@@ -8,6 +8,7 @@ public interface IGameManager {
     Action<GameState> OnGameStateChanged {get; set;}
     Action<int> OnRoundChanged {get; set;}
     void UpdateGameState(GameState state);
+    void UpdateRound();
     GameObject player {get; set;}
     int RoundNum {get; set;}
 }
@@ -45,6 +46,7 @@ public interface IStatsManager {
     float playerSpeed {get; set;}
     float enemyAttackRange {get; set;}
     public Dictionary<string, Weapon> playerUnlockedWeapons { get; set; }
+    float enemyAttackDamage { get; set; }
 }
 
 public interface ISpawnManager {

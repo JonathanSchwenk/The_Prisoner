@@ -10,9 +10,26 @@ public class Player_Actions : MonoBehaviour {
     private GameManager gameManager;
 
 
+    private void GameManagerOnRoundNumChanged(int newRoundNum) {
+        if (gameObject.activeSelf) {
+            StartCoroutine(StopAnimation(0.8f));
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start() {
         gameManager = ServiceLocator.Resolve<IGameManager>() as GameManager;
+
+        if (gameManager != null) {
+            gameManager.OnRoundChanged += GameManagerOnRoundNumChanged;
+        }
+    }
+
+    void OnDestroy() {
+        if (gameManager != null) {
+            gameManager.OnRoundChanged -= GameManagerOnRoundNumChanged;
+        }
     }
 
     void Update() {

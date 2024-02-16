@@ -9,8 +9,9 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private Animator animator;
     [SerializeField] private NavMeshAgent agent;
 
-    private IStatsManager statsManager;
+
     private IGameManager gameManager;
+    private ISpawnManager spawnManager;
 
     public float health { get; private set; }
     public Weapon activeWeapon { get; set; }
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         gameManager = ServiceLocator.Resolve<IGameManager>();
+        spawnManager = ServiceLocator.Resolve<ISpawnManager>();
 
         health = 5;
 
@@ -53,6 +55,10 @@ public class Enemy : MonoBehaviour {
                 animator.SetInteger("WeaponType_int", 0);
 
                 agent.isStopped = true;
+
+                spawnManager.numEnemies -= 1;
+                
+                StartCoroutine(RemovedDead(5.0f));
             }
         }
     }
@@ -60,5 +66,10 @@ public class Enemy : MonoBehaviour {
     IEnumerator ChangeColorBack(float time) {
         yield return new WaitForSeconds(time);
         activeSkin.GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
+    }
+
+    IEnumerator RemovedDead(float time) {
+        yield return new WaitForSeconds(time);
+        gameObject.SetActive(false);
     }
 }
