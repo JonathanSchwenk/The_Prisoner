@@ -55,4 +55,5 @@ public interface ISpawnManager {
 
 public interface IDoorManager {
     GameObject selectedDoor {get; set;}
+    string enemyToSpawn {get; set;}
 }
