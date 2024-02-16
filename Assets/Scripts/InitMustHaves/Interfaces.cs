@@ -55,5 +55,8 @@ public interface ISpawnManager {
 
 public interface IDoorManager {
     GameObject selectedDoor {get; set;}
-    string enemyToSpawn {get; set;}
+    string chosenObject {get; set;}
+    bool canOpenDoor { get; set; }
+    int selectedDoorIndex { get; set; }
+    string[] doorContents { get; set; }
 }

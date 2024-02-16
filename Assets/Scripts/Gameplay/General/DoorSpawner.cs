@@ -8,6 +8,8 @@ public class DoorSpawner : MonoBehaviour
 
     private IObjectPooler objectPooler;
 
+    private GameObject go;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,10 @@ public class DoorSpawner : MonoBehaviour
     }
 
     public void SpawnBehindDoor(string objectToSpawn) {
-        GameObject go = objectPooler.SpawnFromPool(objectToSpawn, transform.position, Quaternion.identity);
+        go = objectPooler.SpawnFromPool(objectToSpawn, transform.position, Quaternion.identity);
+    }
+
+    public void DeactivateBehindDoor() {
+        go.SetActive(false);
     }
 }

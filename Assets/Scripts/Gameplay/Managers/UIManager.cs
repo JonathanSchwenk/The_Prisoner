@@ -5,9 +5,10 @@ using Dorkbots.ServiceLocatorTools;
 
 public class UIManager : MonoBehaviour {
 
-    [SerializeField] GameObject pauseCanvas;
-    [SerializeField] GameObject gameOverCanvas;
-    [SerializeField] GameObject gameplayCanvas;
+    [SerializeField] private GameObject pauseCanvas;
+    [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private GameObject gameplayCanvas;
+    [SerializeField] private GameObject doorCanvas;
 
     private IGameManager gameManager; // GameManager and ServiceManager must be executed first
 
@@ -25,7 +26,7 @@ public class UIManager : MonoBehaviour {
         gameManager.OnGameStateChanged -= GameManagerOnGameStateChanged;
     }
 
-    
+
     private void GameManagerOnGameStateChanged(GameState state) {
         if (state == GameState.Playing) {
             Cursor.visible = false;

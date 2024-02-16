@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour, IDoorManager {
     public GameObject selectedDoor { get; set; }
-    public string enemyToSpawn { get; set; }
+    public string chosenObject { get; set; }
+    public bool canOpenDoor { get; set; }
+    public int selectedDoorIndex { get; set; }
+    public string[] doorContents { get; set; }
+
 
     // need public for canOpenDoor so you can only press one door
 
@@ -14,15 +18,24 @@ public class DoorManager : MonoBehaviour, IDoorManager {
     [SerializeField] private Camera centerDoorCamera;
 
     [SerializeField] private GameObject[] doorList;
+    [SerializeField] private GameObject[] doorParentList;
     [SerializeField] private Player_Weapons weaponDictionary;
+
+    [SerializeField] private GameObject preOpenDoors;
+    [SerializeField] private GameObject openFirstDoor;
+    [SerializeField] private GameObject openSecondDoor;
 
     private string[] listOfEnemies = new string[] { "HumansDoor", "ElfDoor", "GoblinsDoor", "UndeadDoor" };
 
     private bool hasSpawned = false;
+    private int numTimesOpened = 0;
+
+    private IGameManager gameManager;
 
     // Start is called before the first frame update
     void Start() {
-
+        canOpenDoor = true;
+        doorContents = new string[3];
     }
 
     // Update is called once per frame
@@ -32,24 +45,37 @@ public class DoorManager : MonoBehaviour, IDoorManager {
             Ray ray = mainDoorCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit)) {
-                selectedDoor = hit.collider.gameObject;
-                // print(selectedDoor);
-                if (selectedDoor.GetComponent<DoorController>() != null) {
-                    ActivateDoorSpawners();
-                    
-                    selectedDoor.GetComponent<DoorController>().openingDoor = true;
-                    selectedDoor.GetComponent<DoorController>().StopDoors();
+            if (canOpenDoor) {
+                if (Physics.Raycast(ray, out hit)) {
+                    selectedDoor = hit.collider.gameObject;
 
-                    if (selectedDoor.name == "LeftDoor") {
-                        leftDoorCamera.gameObject.SetActive(true);
-                        mainDoorCamera.gameObject.SetActive(false);
-                    } else if (selectedDoor.name == "RightDoor") {
-                        rightDoorCamera.gameObject.SetActive(true);
-                        mainDoorCamera.gameObject.SetActive(false);
-                    } else if (selectedDoor.name == "CenterDoor") {
-                        centerDoorCamera.gameObject.SetActive(true);
-                        mainDoorCamera.gameObject.SetActive(false);
+                    // print(selectedDoor);
+                    if (selectedDoor.GetComponent<DoorController>() != null) {
+                        ActivateDoorSpawners();
+                        
+                        selectedDoor.GetComponent<DoorController>().openingDoor = true;
+                        selectedDoor.GetComponent<DoorController>().StopDoors();
+                        selectedDoor.GetComponent<DoorController>().hasMoved = true;
+
+                        numTimesOpened++;
+
+                        if (selectedDoor.name == "LeftDoor") {
+                            leftDoorCamera.gameObject.SetActive(true);
+                            mainDoorCamera.gameObject.SetActive(false);
+                            selectedDoorIndex = 0;
+                        } else if (selectedDoor.name == "RightDoor") {
+                            rightDoorCamera.gameObject.SetActive(true);
+                            mainDoorCamera.gameObject.SetActive(false);
+                            selectedDoorIndex = 2;
+                        } else if (selectedDoor.name == "CenterDoor") {
+                            centerDoorCamera.gameObject.SetActive(true);
+                            mainDoorCamera.gameObject.SetActive(false);
+                            selectedDoorIndex = 1;
+                        }
+
+                        canOpenDoor = false;
+
+                        ChangeDoorUi();
                     }
                 }
             }
@@ -70,16 +96,22 @@ public class DoorManager : MonoBehaviour, IDoorManager {
                     if (i == weaponDoorIndex) {
                         Weapon weapon = GetRandomEntryFromDictionary(weaponDictionary.playerWeaponsDict).Value;
                         doorList[i].GetComponent<DoorSpawner>().SpawnBehindDoor(weapon.name);
-                        print("Spawned " + weapon.name + " behind door " + i);
+
+                        doorContents[i] = weapon.name;
                     } else {
                         // Spawn enemy behind this door
-                        doorList[i].GetComponent<DoorSpawner>().SpawnBehindDoor(listOfEnemies[Random.Range(0, listOfEnemies.Length)]);
-                        print("Spawned " + listOfEnemies[Random.Range(0, listOfEnemies.Length)] + " behind door " + i);
+                        string randomEnemy = listOfEnemies[Random.Range(0, listOfEnemies.Length)];
+                        doorList[i].GetComponent<DoorSpawner>().SpawnBehindDoor(randomEnemy);
+
+                        doorContents[i] = randomEnemy;
                     }
             } else {
                 // Spawn enemies behind all doors
                 for (int i = 0; i < 3; i++) {
-                    doorList[i].GetComponent<DoorSpawner>().SpawnBehindDoor(listOfEnemies[Random.Range(0, listOfEnemies.Length)]);
+                    string randomEnemy = listOfEnemies[Random.Range(0, listOfEnemies.Length)];
+                    doorList[i].GetComponent<DoorSpawner>().SpawnBehindDoor(randomEnemy);
+
+                    doorContents[i] = randomEnemy;
                 }
             }
         }
@@ -91,5 +123,68 @@ public class DoorManager : MonoBehaviour, IDoorManager {
         List<KeyValuePair<string, Weapon>> entries = new List<KeyValuePair<string, Weapon>>(dict);
         int randomIndex = Random.Range(0, entries.Count);
         return entries[randomIndex];
+    }
+
+    private void ChangeDoorUi() {
+        if (numTimesOpened == 1) {
+            preOpenDoors.SetActive(false);
+            openFirstDoor.SetActive(true);
+        } else if (numTimesOpened == 2) {
+            preOpenDoors.SetActive(false);
+            openSecondDoor.SetActive(true);
+        }
+    }
+
+     public void SelectButton() {
+        chosenObject = doorContents[selectedDoorIndex];
+        print(chosenObject);
+        canOpenDoor = true;
+
+        // Reset doors canvas
+        preOpenDoors.SetActive(true);
+        openFirstDoor.SetActive(false);
+        openSecondDoor.SetActive(false);
+
+        // Reset cameras
+        leftDoorCamera.gameObject.SetActive(false);
+        rightDoorCamera.gameObject.SetActive(false);
+        centerDoorCamera.gameObject.SetActive(false);
+        mainDoorCamera.gameObject.SetActive(true);
+
+        numTimesOpened = 0;
+
+        // Need to reset doors to be shut and despawn the enemies
+        foreach (GameObject door in doorParentList) {
+            if (door.GetComponent<DoorController>().hasMoved == true) {
+                door.GetComponent<DoorController>().CloseDoors();
+                door.GetComponent<DoorController>().openingDoor = false;
+                door.GetComponent<DoorController>().hasMoved = false;
+            }
+        }
+
+        // Resets enemies
+        foreach (GameObject door in doorList) {
+            door.GetComponent<DoorSpawner>().DeactivateBehindDoor();
+        }
+        hasSpawned = false;
+
+        // Tell the game manager to update the game state
+
+    }
+
+    // Choose again button
+    public void ChooseAgainButton() {
+        canOpenDoor = true;
+
+        // Reset doors canvas
+        preOpenDoors.SetActive(true);
+        openFirstDoor.SetActive(false);
+        openSecondDoor.SetActive(false);
+
+        // reset cameras
+        leftDoorCamera.gameObject.SetActive(false);
+        rightDoorCamera.gameObject.SetActive(false);
+        centerDoorCamera.gameObject.SetActive(false);
+        mainDoorCamera.gameObject.SetActive(true);
     }
 }

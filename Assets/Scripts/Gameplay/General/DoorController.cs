@@ -9,11 +9,16 @@ public class DoorController : MonoBehaviour
     [SerializeField] private GameObject rightDoor;
 
     public bool openingDoor = false;
+    public bool hasMoved = false;
+
+    private Vector3 leftDoorPos;
+    private Vector3 rightDoorPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        leftDoorPos = leftDoor.transform.position;
+        rightDoorPos = rightDoor.transform.position;
     }
 
     // Update is called once per frame
@@ -31,6 +36,11 @@ public class DoorController : MonoBehaviour
 
     public void StopDoors() {
         StartCoroutine(MoveDoors(3.5f));
+    }
+
+    public void CloseDoors() {
+        leftDoor.transform.position = leftDoorPos;
+        rightDoor.transform.position = rightDoorPos;
     }
 
     IEnumerator MoveDoors(float time) {
