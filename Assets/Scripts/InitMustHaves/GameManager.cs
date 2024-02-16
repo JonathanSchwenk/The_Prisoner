@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour, IGameManager
 
         // Swtich statement that deals with each possible state 
         switch(newState) {
-            case GameState.Tutorial:
+            case GameState.Doors:
 
                 break;
             case GameState.Idle:
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour, IGameManager
 
 // GameState enum (basically a definition)
 public enum GameState {
-    Tutorial,
+    Doors,
     Idle,
     Playing,
     GameOver

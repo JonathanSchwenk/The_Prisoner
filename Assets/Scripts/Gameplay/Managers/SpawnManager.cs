@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
     public bool canSpawn {get; set;}
 
     private int bankCap = 20; // Max enemies for a level 
+    private int mutliplier = 2;
 
     private IGameManager gameManager;
 
@@ -27,7 +28,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
         enemyToSpawn = "Undead_OneHanded";
 
         numEnemies = 0;
-        bankValue = gameManager.RoundNum * 10;
+        bankValue = gameManager.RoundNum * mutliplier;
     }
 
     void OnDestroy() {
@@ -37,7 +38,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
     
     private void GameManagerOnRoundNumChanged(int newRoundNum) {
-        bankValue = gameManager.RoundNum * 10;
+        bankValue = gameManager.RoundNum * mutliplier;
 
         if (bankValue > bankCap) {
             bankValue = bankCap;

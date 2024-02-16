@@ -12,6 +12,7 @@ public class ServiceManager : MonoBehaviour
     public StatsManager statsManager;
     public SpawnManager spawnManager;
     public ObjectPooler objectPooler;
+    public DoorManager doorManager;
     
 
 
@@ -55,6 +56,9 @@ public class ServiceManager : MonoBehaviour
         if (!ServiceLocator.IsRegistered<IObjectPooler>()) {
             ServiceLocator.Register<IObjectPooler>(objectPooler);
         }
+        if (!ServiceLocator.IsRegistered<IDoorManager>()) {
+            ServiceLocator.Register<IDoorManager>(doorManager);
+        }
 
     }
 
@@ -81,6 +85,9 @@ public class ServiceManager : MonoBehaviour
         }
         if (ServiceLocator.IsRegistered<IObjectPooler>()) {
             ServiceLocator.Unregister<IObjectPooler>();
+        }
+        if (ServiceLocator.IsRegistered<IDoorManager>()) {
+            ServiceLocator.Unregister<IDoorManager>();
         }
     }
     

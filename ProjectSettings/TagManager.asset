@@ -11,6 +11,9 @@ TagManager:
   - Human_Spawner
   - Elf_Spawner
   - Undead_Spawner
+  - LeftDoor
+  - CenterDoor
+  - RightDoor
   layers:
   - Default
   - TransparentFX

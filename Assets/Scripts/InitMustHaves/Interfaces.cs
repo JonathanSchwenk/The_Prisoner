@@ -52,3 +52,7 @@ public interface ISpawnManager {
     int bankValue {get; set;}
     bool canSpawn {get; set;}
 }
+
+public interface IDoorManager {
+    GameObject selectedDoor {get; set;}
+}
