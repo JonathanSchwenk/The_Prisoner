@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour {
             pauseCanvas.SetActive(false);
             gameOverCanvas.SetActive(false);
             gameplayCanvas.SetActive(true);
+            doorCanvas.SetActive(false);
         } else if (state == GameState.Idle) {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -44,11 +45,25 @@ public class UIManager : MonoBehaviour {
             pauseCanvas.SetActive(true);
             gameOverCanvas.SetActive(false);
             gameplayCanvas.SetActive(false);
+            doorCanvas.SetActive(false);
         } else if (state == GameState.GameOver) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
             Time.timeScale = 0;
             pauseCanvas.SetActive(false);
             gameOverCanvas.SetActive(true);
             gameplayCanvas.SetActive(false);
+            doorCanvas.SetActive(false);
+        } else if (state == GameState.Doors) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            Time.timeScale = 1;
+            pauseCanvas.SetActive(false);
+            gameOverCanvas.SetActive(false);
+            gameplayCanvas.SetActive(false);
+            doorCanvas.SetActive(true);
 
         }
     }
@@ -60,9 +75,9 @@ public class UIManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            if (gameManager.State == GameState.Playing) {
+            if (gameManager.State == GameState.Playing && gameManager.State != GameState.Doors || gameManager.State == GameState.GameOver) {
                 gameManager.UpdateGameState(GameState.Idle);
-            } else if (gameManager.State == GameState.Idle) {
+            } else if (gameManager.State == GameState.Idle && gameManager.State != GameState.Doors || gameManager.State == GameState.GameOver) {
                 gameManager.UpdateGameState(GameState.Playing);
             }
         }

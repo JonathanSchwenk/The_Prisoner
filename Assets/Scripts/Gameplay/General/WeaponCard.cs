@@ -14,11 +14,16 @@ public class WeaponCard : MonoBehaviour
     [SerializeField] TextMeshProUGUI weaponName;
     [SerializeField] private Player_Weapons weaponDictionary;
 
+    [SerializeField] private GameObject lockedBackground;
+    [SerializeField] private GameObject unlockedBackground;
+
     private IGameManager gameManager;
+    private IStatsManager statsManager;
 
     // Start is called before the first frame update
     void Start() {
         gameManager = ServiceLocator.Resolve<IGameManager>();
+        statsManager = ServiceLocator.Resolve<IStatsManager>();
 
         weaponName.text = gameObject.name;
     }
@@ -26,6 +31,14 @@ public class WeaponCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (statsManager.playerUnlockedWeapons.ContainsKey(gameObject.name)) {
+            lockedBackground.SetActive(false);
+            unlockedBackground.SetActive(true);
+        } else {
+            lockedBackground.SetActive(true);
+            unlockedBackground.SetActive(false);
+        }
+
         if (gameManager.player.GetComponent<Player>().activeWeapon.name == gameObject.name) {
             selectedBackground.SetActive(true);
             selectedShadow.SetActive(true);
@@ -40,6 +53,8 @@ public class WeaponCard : MonoBehaviour
     }
 
     public void SelectWeapon() {
-        gameManager.player.GetComponent<Player>().activeWeapon = weaponDictionary.playerWeaponsDict[gameObject.name];
+        if (statsManager.playerUnlockedWeapons.ContainsKey(gameObject.name)) {
+            gameManager.player.GetComponent<Player>().activeWeapon = weaponDictionary.playerWeaponsDict[gameObject.name];
+        }
     }
 }

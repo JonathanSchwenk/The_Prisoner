@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Dorkbots.ServiceLocatorTools;
 using UnityEngine;
 
 public class DoorManager : MonoBehaviour, IDoorManager {
@@ -31,11 +32,17 @@ public class DoorManager : MonoBehaviour, IDoorManager {
     private int numTimesOpened = 0;
 
     private IGameManager gameManager;
+    private ISpawnManager spawnManager;
+    private IStatsManager statsManager;
 
     // Start is called before the first frame update
     void Start() {
         canOpenDoor = true;
         doorContents = new string[3];
+
+        gameManager = ServiceLocator.Resolve<IGameManager>();
+        spawnManager = ServiceLocator.Resolve<ISpawnManager>();
+        statsManager = ServiceLocator.Resolve<IStatsManager>();
     }
 
     // Update is called once per frame
@@ -169,6 +176,20 @@ public class DoorManager : MonoBehaviour, IDoorManager {
         hasSpawned = false;
 
         // Tell the game manager to update the game state
+        gameManager.UpdateGameState(GameState.Playing);
+
+        // Change enemiesToSpawn in spawnManager to chosenObject
+        if (chosenObject == "HumansDoor")
+            spawnManager.enemyToSpawn = "Humans";
+        else if (chosenObject == "ElfDoor")
+            spawnManager.enemyToSpawn = "Elves";
+        else if (chosenObject == "GoblinsDoor")
+            spawnManager.enemyToSpawn = "Goblins";
+        else if (chosenObject == "UndeadDoor")
+            spawnManager.enemyToSpawn = "Undead";
+        else {
+            statsManager.playerUnlockedWeapons.Add(weaponDictionary.playerWeaponsDict[chosenObject].name, weaponDictionary.playerWeaponsDict[chosenObject]);
+        }
 
     }
 

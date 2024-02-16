@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
         }
 
-        enemyToSpawn = "Undead_OneHanded";
+        // enemyToSpawn = "UndeadDoor";
 
         numEnemies = 0;
         bankValue = gameManager.RoundNum * mutliplier;
@@ -62,7 +62,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
             canSpawn = false;
         }
         if (bankValue == 0 & numEnemies == 0) {
-            // print("round over");
+            print("round over");
             // Trigger doors and new round
         }
     }

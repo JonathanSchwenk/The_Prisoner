@@ -44,6 +44,7 @@ public interface IStatsManager {
     float enemySpeed {get; set;}
     float playerSpeed {get; set;}
     float enemyAttackRange {get; set;}
+    public Dictionary<string, Weapon> playerUnlockedWeapons { get; set; }
 }
 
 public interface ISpawnManager {
