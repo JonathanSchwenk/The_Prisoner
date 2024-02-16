@@ -1391,7 +1391,7 @@ Transform:
   m_GameObject: {fileID: 2820789727271316763}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.372173, y: 0, z: 3.826282}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1516,6 +1516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3878192688941908775}
   agent: {fileID: 2498640798679786648}
+  enemyType: 
 --- !u!114 &710646150890431215
 MonoBehaviour:
   m_ObjectHideFlags: 0

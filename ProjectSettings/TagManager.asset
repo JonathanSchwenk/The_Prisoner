@@ -7,6 +7,10 @@ TagManager:
   - Player_Weapon
   - Enemy
   - Enemy_Weapon
+  - Goblin_Spawner
+  - Human_Spawner
+  - Elf_Spawner
+  - Undead_Spawner
   layers:
   - Default
   - TransparentFX
