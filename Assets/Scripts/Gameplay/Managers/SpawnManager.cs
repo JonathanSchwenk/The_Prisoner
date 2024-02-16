@@ -63,6 +63,8 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
         } else {
             canSpawn = false;
         }
+
+        print("bankValue: " + bankValue + " numEnemies: " + numEnemies);
         if (bankValue == 0 && numEnemies == 0) {
             if (!roundUpdated) {
                 roundUpdated = true;

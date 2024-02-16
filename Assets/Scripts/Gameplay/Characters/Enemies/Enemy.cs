@@ -56,8 +56,10 @@ public class Enemy : MonoBehaviour {
 
                 agent.isStopped = true;
 
+                gameObject.GetComponent<Collider>().enabled = false;
+
                 spawnManager.numEnemies -= 1;
-                
+
                 StartCoroutine(RemovedDead(5.0f));
             }
         }
