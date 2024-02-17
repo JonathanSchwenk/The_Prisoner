@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private GameObject gameplayCanvas;
     [SerializeField] private GameObject doorCanvas;
+    [SerializeField] private GameObject instructionsCanvas;
 
     private IGameManager gameManager; // GameManager and ServiceManager must be executed first
 
@@ -64,8 +65,7 @@ public class UIManager : MonoBehaviour {
             gameOverCanvas.SetActive(false);
             gameplayCanvas.SetActive(false);
             doorCanvas.SetActive(true);
-
-        }
+        } 
     }
     // Start is called before the first frame update
     void Start() {
@@ -79,6 +79,32 @@ public class UIManager : MonoBehaviour {
                 gameManager.UpdateGameState(GameState.Idle);
             } else if (gameManager.State == GameState.Idle && gameManager.State != GameState.Doors || gameManager.State == GameState.GameOver) {
                 gameManager.UpdateGameState(GameState.Playing);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.I)) {
+            if (gameManager.State == GameState.Idle) {
+                if (instructionsCanvas.activeSelf) {
+                    instructionsCanvas.SetActive(false);
+                    pauseCanvas.SetActive(true);
+                } else {
+                    instructionsCanvas.SetActive(true);
+                    pauseCanvas.SetActive(false);
+                }
+            } else if (gameManager.State == GameState.GameOver) {
+                if (instructionsCanvas.activeSelf) {
+                    instructionsCanvas.SetActive(false);
+                    gameOverCanvas.SetActive(true);
+                } else {
+                    instructionsCanvas.SetActive(true);
+                    gameOverCanvas.SetActive(false);
+                }
+            } else {
+                if (instructionsCanvas.activeSelf) {
+                    instructionsCanvas.SetActive(false);
+                } else {
+                    instructionsCanvas.SetActive(true);
+                }
             }
         }
     }

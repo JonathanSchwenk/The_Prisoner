@@ -12,8 +12,9 @@ public class Enemy : MonoBehaviour {
 
     private IGameManager gameManager;
     private ISpawnManager spawnManager;
+    private IStatsManager statsManager;
 
-    public float health { get; private set; }
+    public float health { get; set; }
     public Weapon activeWeapon { get; set; }
 
     private GameObject activeSkin;
@@ -23,8 +24,9 @@ public class Enemy : MonoBehaviour {
     void Start() {
         gameManager = ServiceLocator.Resolve<IGameManager>();
         spawnManager = ServiceLocator.Resolve<ISpawnManager>();
+        statsManager = ServiceLocator.Resolve<IStatsManager>();
 
-        health = 5;
+        health = statsManager.enemyHealth;
 
         for (int i = 0; i < transform.childCount; i++) {
             // Get the i-th child.

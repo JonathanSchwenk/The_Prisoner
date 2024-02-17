@@ -47,6 +47,9 @@ public interface IStatsManager {
     float enemyAttackRange {get; set;}
     public Dictionary<string, Weapon> playerUnlockedWeapons { get; set; }
     float enemyAttackDamage { get; set; }
+    int bankCap { get; set; }
+    int maxEnemies { get; set; }
+    int enemyHealth { get; set; }
 }
 
 public interface ISpawnManager {

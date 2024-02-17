@@ -10,14 +10,16 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
     public int bankValue {get; set;}
     public bool canSpawn {get; set;}
 
-    private int bankCap = 20; // Max enemies for a level 
+    private int bankCap; // Max enemies for a level 
     private int mutliplier = 2;
     private bool roundUpdated = false;
 
     private IGameManager gameManager;
+    private IStatsManager statsManager;
 
     void Start() {
         gameManager = ServiceLocator.Resolve<IGameManager>();
+        statsManager = ServiceLocator.Resolve<IStatsManager>();
 
         // Subscribes to gamemanagers actions
         if (gameManager != null) {
@@ -30,6 +32,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
         numEnemies = 0;
         bankValue = gameManager.RoundNum * mutliplier;
+        bankCap = statsManager.bankCap;
     }
 
     void OnDestroy() {
@@ -64,7 +67,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
             canSpawn = false;
         }
 
-        print("bankValue: " + bankValue + " numEnemies: " + numEnemies);
+        // print("bankValue: " + bankValue + " numEnemies: " + numEnemies);
         if (bankValue == 0 && numEnemies == 0) {
             if (!roundUpdated) {
                 roundUpdated = true;

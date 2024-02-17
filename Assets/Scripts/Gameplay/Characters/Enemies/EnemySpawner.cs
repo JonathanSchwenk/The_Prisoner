@@ -7,20 +7,24 @@ public class EnemySpawner : MonoBehaviour {
 
     private IObjectPooler objectPooler;
     private ISpawnManager spawnManager;
+    private IStatsManager statsManager;
 
     private float spawnDelayMin = 2.0f;
     private float spawnDelayMax = 4.0f;
     private float spawnDelayCounter;
     private float spawnDelayRate;
 
-    private int maxEnemies = 20;
+    private int maxEnemies; // Max enemies at once
 
     // Start is called before the first frame update
     void Start() {
         objectPooler = ServiceLocator.Resolve<IObjectPooler>();
         spawnManager = ServiceLocator.Resolve<ISpawnManager>();
+        statsManager = ServiceLocator.Resolve<IStatsManager>();
 
         spawnDelayCounter = 0;
+
+        maxEnemies = statsManager.maxEnemies;
     }
 
     // Update is called once per frame
@@ -48,26 +52,32 @@ public class EnemySpawner : MonoBehaviour {
                     enemy = objectPooler.SpawnFromPool("Goblin_Male", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 1) {
                     enemy = objectPooler.SpawnFromPool("Goblin_Warrior", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 2) {
                     enemy = objectPooler.SpawnFromPool("Goblin_King", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 3) {
                     enemy = objectPooler.SpawnFromPool("Goblin_WitchDoctor", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 4) {
                     enemy = objectPooler.SpawnFromPool("Goblin_Female", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Stab";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 5) {
                     enemy = objectPooler.SpawnFromPool("Goblin_Hunter", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Stab";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 }
                 spawnManager.numEnemies += 1;
                 spawnManager.bankValue -= 1;
@@ -82,26 +92,32 @@ public class EnemySpawner : MonoBehaviour {
                     enemy = objectPooler.SpawnFromPool("Human_Knight_Dark", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 1) {
                     enemy = objectPooler.SpawnFromPool("Human_Knight_Tin", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 2) {
                     enemy = objectPooler.SpawnFromPool("Human_Knight_Heavy_1", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 3) {
                     enemy = objectPooler.SpawnFromPool("Human_Knight_Heavy_2", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 4) {
                     enemy = objectPooler.SpawnFromPool("Human_Knight_1", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Stab";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 5) {
                     enemy = objectPooler.SpawnFromPool("Human_Knight_2", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Stab";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 }
                 spawnManager.numEnemies += 1;
                 spawnManager.bankValue -= 1;
@@ -116,22 +132,27 @@ public class EnemySpawner : MonoBehaviour {
                     enemy = objectPooler.SpawnFromPool("Elf_Male", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 1) {
                     enemy = objectPooler.SpawnFromPool("Elf_Female", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 2) {
                     enemy = objectPooler.SpawnFromPool("Elf_King", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 3) {
                     enemy = objectPooler.SpawnFromPool("Elf_Knight", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 4) {
                     enemy = objectPooler.SpawnFromPool("Elf_Assassin", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Stab";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 }
                 spawnManager.numEnemies += 1;
                 spawnManager.bankValue -= 1;
@@ -146,26 +167,32 @@ public class EnemySpawner : MonoBehaviour {
                     enemy = objectPooler.SpawnFromPool("Undead_King", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 1) {
                     enemy = objectPooler.SpawnFromPool("Undead_Footman_02", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "One Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 2) {
                     enemy = objectPooler.SpawnFromPool("Undead_Heavy", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 3) {
                     enemy = objectPooler.SpawnFromPool("Undead_Footman_01", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Two Handed";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 4) {
                     enemy = objectPooler.SpawnFromPool("Undead_Skeleton", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Stab";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 } else if (enemyToSpawn == 5) {
                     enemy = objectPooler.SpawnFromPool("Undead_Rogue", transform.position, Quaternion.identity);
                     enemy.GetComponent<DefaultEnemyAnimations>().enemyType = "Stab";
                     enemy.GetComponent<Collider>().enabled = true;
+                    enemy.GetComponent<Enemy>().health = statsManager.enemyHealth;
                 }
                 spawnManager.numEnemies += 1;
                 spawnManager.bankValue -= 1;

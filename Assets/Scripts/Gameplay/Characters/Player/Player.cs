@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Enemy_Weapon") {
             health -= statsManager.enemyAttackDamage;
             timeToWaitBeforeRecoveryCounter = 0;
-            print("Player health: " + health);
+            // print("Player health: " + health);
         }
     }
 }
