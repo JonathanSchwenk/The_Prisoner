@@ -7,7 +7,8 @@ public class Player_Actions : MonoBehaviour {
     [SerializeField] private Animator animator;
 
 
-    private GameManager gameManager;
+    private IGameManager gameManager;
+    private IAudioManager audioManager;
 
 
     private void GameManagerOnRoundNumChanged(int newRoundNum) {
@@ -19,7 +20,8 @@ public class Player_Actions : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        gameManager = ServiceLocator.Resolve<IGameManager>() as GameManager;
+        gameManager = ServiceLocator.Resolve<IGameManager>();
+        audioManager = ServiceLocator.Resolve<IAudioManager>();
 
         if (gameManager != null) {
             gameManager.OnRoundChanged += GameManagerOnRoundNumChanged;
@@ -37,6 +39,9 @@ public class Player_Actions : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) // 0 is the button number for the left mouse button
         {
             Attack();
+
+            StartCoroutine(DelaySound(0.25f));
+            // audioManager.PlaySFX("PlayerAttack");
         }
     }
 
@@ -64,5 +69,14 @@ public class Player_Actions : MonoBehaviour {
         yield return new WaitForSeconds(time);
         animator.SetInteger("WeaponType_int", 0);
         animator.SetInteger("MeleeType_int", 0);
+    }
+
+    IEnumerator DelaySound(float time) {
+        yield return new WaitForSeconds(time);
+        if (gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "One Handed" || gameManager.player.GetComponent<Player>().activeWeapon.weaponType == "Two Handed") {
+            audioManager.PlaySFX("PlayerAttack");
+        } else {
+            audioManager.PlaySFX("PlayerStab");
+        }
     }
 }

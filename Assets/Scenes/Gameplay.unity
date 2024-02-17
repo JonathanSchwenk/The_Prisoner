@@ -8400,7 +8400,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0892b451886b1436bbb60e91c0d0c6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: PlayerAttack
+    clip: {fileID: 8300000, guid: 529ab1cfa821c95409c299a5dcdc12cb, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: PlayerStab
+    clip: {fileID: 8300000, guid: ccf996a0f224bf645b45e3e9077b046b, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: PlayerTakeDamage
+    clip: {fileID: 8300000, guid: dc67cf5597d41fc48883336552ca7fcc, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: EnemyHit
+    clip: {fileID: 8300000, guid: 6b260d8219f470844a2eaec8042dda6a, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: a3523a406235a7149bf7d17d22b72f53, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: OpenDoor
+    clip: {fileID: 8300000, guid: ede90a1505447b14bb9960d0a8ef386e, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: f0b720ab595bf6e4dbccd582a24b863d, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: PauseInstructions
+    clip: {fileID: 8300000, guid: daaf3da4a2943f242a9cf9d3d1b2efe7, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
 --- !u!4 &423303021
 Transform:
   m_ObjectHideFlags: 0
@@ -25148,7 +25212,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1240924268}
   - component: {fileID: 1240924271}
-  - component: {fileID: 1240924270}
   - component: {fileID: 1240924269}
   m_Layer: 0
   m_Name: Main Camera
@@ -25186,14 +25249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1205385226}
   mouseSensitivity: 2
---- !u!81 &1240924270
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240924267}
-  m_Enabled: 1
 --- !u!20 &1240924271
 Camera:
   m_ObjectHideFlags: 0
@@ -31760,6 +31815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1577104802}
+  - component: {fileID: 1577104803}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -31789,6 +31845,14 @@ Transform:
   - {fileID: 1733162399}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &1577104803
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577104801}
+  m_Enabled: 1
 --- !u!1 &1579642766 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 107974, guid: 6e323d600295e85498372437c65fc51e, type: 3}
