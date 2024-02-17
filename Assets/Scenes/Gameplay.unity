@@ -3179,7 +3179,6 @@ GameObject:
   m_Component:
   - component: {fileID: 183655850}
   - component: {fileID: 183655852}
-  - component: {fileID: 183655851}
   m_Layer: 0
   m_Name: LeftDoorCam
   m_TagString: Untagged
@@ -3202,14 +3201,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 886800489}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!81 &183655851
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183655849}
-  m_Enabled: 1
 --- !u!20 &183655852
 Camera:
   m_ObjectHideFlags: 0
@@ -4425,7 +4416,6 @@ GameObject:
   m_Component:
   - component: {fileID: 248727749}
   - component: {fileID: 248727751}
-  - component: {fileID: 248727750}
   m_Layer: 0
   m_Name: RightDoorCam
   m_TagString: Untagged
@@ -4448,14 +4438,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 886800489}
   m_LocalEulerAnglesHint: {x: 15, y: 180, z: 0}
---- !u!81 &248727750
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 248727748}
-  m_Enabled: 1
 --- !u!20 &248727751
 Camera:
   m_ObjectHideFlags: 0
@@ -8380,6 +8362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 423303021}
+  - component: {fileID: 423303022}
   - component: {fileID: 423303020}
   m_Layer: 0
   m_Name: AudioManager
@@ -8441,7 +8424,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     source: {fileID: 0}
-  - name: OpenDoor
+  - name: DoorSlide
     clip: {fileID: 8300000, guid: ede90a1505447b14bb9960d0a8ef386e, type: 3}
     volume: 1
     pitch: 1
@@ -8465,6 +8448,14 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     source: {fileID: 0}
+  - name: RoundWon
+    clip: {fileID: 8300000, guid: 1b58eb8e1e4a3e3489506e73264de6de, type: 3}
+    volume: 1
+    pitch: 1
+    spacialBlend: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
 --- !u!4 &423303021
 Transform:
   m_ObjectHideFlags: 0
@@ -8480,6 +8471,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &423303022
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423303019}
+  m_Enabled: 1
 --- !u!1001 &423810217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10592,7 +10591,6 @@ GameObject:
   m_Component:
   - component: {fileID: 542800336}
   - component: {fileID: 542800338}
-  - component: {fileID: 542800337}
   m_Layer: 0
   m_Name: DoorCamera
   m_TagString: Untagged
@@ -10615,14 +10613,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 886800489}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!81 &542800337
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542800335}
-  m_Enabled: 1
 --- !u!20 &542800338
 Camera:
   m_ObjectHideFlags: 0
@@ -20199,7 +20189,6 @@ GameObject:
   m_Component:
   - component: {fileID: 993926293}
   - component: {fileID: 993926295}
-  - component: {fileID: 993926294}
   m_Layer: 0
   m_Name: CenterDoorCam
   m_TagString: Untagged
@@ -20222,14 +20211,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 886800489}
   m_LocalEulerAnglesHint: {x: 15, y: 180, z: 0}
---- !u!81 &993926294
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993926292}
-  m_Enabled: 1
 --- !u!20 &993926295
 Camera:
   m_ObjectHideFlags: 0
@@ -31815,7 +31796,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1577104802}
-  - component: {fileID: 1577104803}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -31845,14 +31825,6 @@ Transform:
   - {fileID: 1733162399}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1577104803
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577104801}
-  m_Enabled: 1
 --- !u!1 &1579642766 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 107974, guid: 6e323d600295e85498372437c65fc51e, type: 3}

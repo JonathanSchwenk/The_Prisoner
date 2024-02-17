@@ -13,6 +13,7 @@ public class GameOverCanvasManager : MonoBehaviour
     private ISaveManager saveManager;
     private IGameManager gameManager;
     private IStatsManager statsManager;
+    private IAudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class GameOverCanvasManager : MonoBehaviour
         gameManager = ServiceLocator.Resolve<IGameManager>();
         saveManager = ServiceLocator.Resolve<ISaveManager>();
         statsManager = ServiceLocator.Resolve<IStatsManager>();
+        audioManager = ServiceLocator.Resolve<IAudioManager>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class GameOverCanvasManager : MonoBehaviour
 
     public void RestartGame() {
         gameManager.UpdateGameState(GameState.Doors);
+        audioManager.PlaySFX("ButtonClick");
 
         gameManager.RoundNum = 0;
         gameManager.UpdateRound();

@@ -11,9 +11,11 @@ public class Player : MonoBehaviour
     private IStatsManager statsManager;
     private ISaveManager saveManager;
     private IGameManager gameManager;
+    private IAudioManager audioManager;
 
     public float health {get; set;}
     public Weapon activeWeapon {get; set;}
+    public bool playerIsDead {get; private set;}
 
     public float maxHealth {get; private set;}
 
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
         statsManager = ServiceLocator.Resolve<IStatsManager>();
         saveManager = ServiceLocator.Resolve<ISaveManager>();
         gameManager = ServiceLocator.Resolve<IGameManager>();
+        audioManager = ServiceLocator.Resolve<IAudioManager>();
 
         maxHealth = 100;
 
@@ -79,12 +82,28 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         // print("Player hit by: " + other.gameObject.tag);
         if (other.gameObject.tag == "Enemy_Weapon") {
-            health -= statsManager.enemyAttackDamage;
+            audioManager.PlaySFX("PlayerTakeDamage");
+
+            // health -= statsManager.enemyAttackDamage;
+            health -= 20;
             timeToWaitBeforeRecoveryCounter = 0;
             // print("Player health: " + health);
             if (health <= 0) {
-                gameManager.UpdateGameState(GameState.GameOver);
+                gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("Death_b", true);
+                gameObject.transform.GetChild(0).GetComponent<Animator>().SetInteger("DeathType_int", 1);
+
+                playerIsDead = true;
+
+                StartCoroutine(WaitForGameOver(4.0f));
             }
         }
     }
+
+    IEnumerator WaitForGameOver(float time) {
+        yield return new WaitForSeconds(time);
+        gameManager.UpdateGameState(GameState.GameOver);
+        audioManager.PlaySFX("GameOver");
+        playerIsDead = false;
+    }
+
 }

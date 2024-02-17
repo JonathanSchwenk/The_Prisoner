@@ -16,10 +16,12 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
     private IGameManager gameManager;
     private IStatsManager statsManager;
+    private IAudioManager audioManager;
 
     void Start() {
         gameManager = ServiceLocator.Resolve<IGameManager>();
         statsManager = ServiceLocator.Resolve<IStatsManager>();
+        audioManager = ServiceLocator.Resolve<IAudioManager>();
 
         // Subscribes to gamemanagers actions
         if (gameManager != null) {
@@ -69,10 +71,13 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
             canSpawn = false;
         }
 
-        print("bankValue: " + bankValue + " numEnemies: " + numEnemies);
+        // print("bankValue: " + bankValue + " numEnemies: " + numEnemies);
         if (bankValue == 0 && numEnemies == 0) {
             if (!roundUpdated) {
                 roundUpdated = true;
+
+                audioManager.PlaySFX("RoundWon");
+                
                 // print("Updated round no more enemies");
                 StartCoroutine(ChangeState(5.0f));
             }

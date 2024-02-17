@@ -34,6 +34,7 @@ public class DoorManager : MonoBehaviour, IDoorManager {
     private IGameManager gameManager;
     private ISpawnManager spawnManager;
     private IStatsManager statsManager;
+    private IAudioManager audioManager;
 
     // Start is called before the first frame update
     void Start() {
@@ -43,6 +44,7 @@ public class DoorManager : MonoBehaviour, IDoorManager {
         gameManager = ServiceLocator.Resolve<IGameManager>();
         spawnManager = ServiceLocator.Resolve<ISpawnManager>();
         statsManager = ServiceLocator.Resolve<IStatsManager>();
+        audioManager = ServiceLocator.Resolve<IAudioManager>();
     }
 
     // Update is called once per frame
@@ -60,6 +62,7 @@ public class DoorManager : MonoBehaviour, IDoorManager {
                     if (selectedDoor.GetComponent<DoorController>() != null) {
                         ActivateDoorSpawners();
 
+                        audioManager.PlaySFX("DoorSlide");
                         selectedDoor.GetComponent<DoorController>().openingDoor = true;
                         selectedDoor.GetComponent<DoorController>().StopDoors();
 
@@ -142,6 +145,9 @@ public class DoorManager : MonoBehaviour, IDoorManager {
     }
 
     public void SelectButton() {
+        audioManager.PlaySFX("ButtonClick");
+        audioManager.StopSFX("DoorSlide");
+
         chosenObject = doorContents[selectedDoorIndex];
         // print(chosenObject);
         canOpenDoor = true;
@@ -213,6 +219,9 @@ public class DoorManager : MonoBehaviour, IDoorManager {
 
     // Choose again button
     public void ChooseAgainButton() {
+        audioManager.PlaySFX("ButtonClick");
+        audioManager.StopSFX("DoorSlide");
+
         canOpenDoor = true;
 
         // Reset doors canvas

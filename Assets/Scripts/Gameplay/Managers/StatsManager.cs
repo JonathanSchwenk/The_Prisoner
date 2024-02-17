@@ -44,7 +44,7 @@ public class StatsManager : MonoBehaviour, IStatsManager {
                     attackRange = 1.5f,
                     weaponType = "One Handed",
                 }
-            }
+            },
         };
     }
 

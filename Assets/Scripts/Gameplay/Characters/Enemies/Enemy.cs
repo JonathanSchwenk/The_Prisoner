@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour {
     private IGameManager gameManager;
     private ISpawnManager spawnManager;
     private IStatsManager statsManager;
+    private IAudioManager audioManager;
 
     public float health { get; set; }
     public Weapon activeWeapon { get; set; }
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour {
         gameManager = ServiceLocator.Resolve<IGameManager>();
         spawnManager = ServiceLocator.Resolve<ISpawnManager>();
         statsManager = ServiceLocator.Resolve<IStatsManager>();
+        audioManager = ServiceLocator.Resolve<IAudioManager>();
 
         health = statsManager.enemyHealth;
 
@@ -48,6 +50,8 @@ public class Enemy : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player_Weapon") {
+            audioManager.PlaySFX("EnemyHit");
+
             activeSkin.GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
             StartCoroutine(ChangeColorBack(0.2f));
             health -= gameManager.player.GetComponent<Player>().activeWeapon.damage;

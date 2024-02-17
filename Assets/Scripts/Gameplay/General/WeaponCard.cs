@@ -19,11 +19,13 @@ public class WeaponCard : MonoBehaviour
 
     private IGameManager gameManager;
     private IStatsManager statsManager;
+    private IAudioManager audioManager;
 
     // Start is called before the first frame update
     void Start() {
         gameManager = ServiceLocator.Resolve<IGameManager>();
         statsManager = ServiceLocator.Resolve<IStatsManager>();
+        audioManager = ServiceLocator.Resolve<IAudioManager>();
 
         weaponName.text = gameObject.name;
     }
@@ -54,6 +56,7 @@ public class WeaponCard : MonoBehaviour
 
     public void SelectWeapon() {
         if (statsManager.playerUnlockedWeapons.ContainsKey(gameObject.name)) {
+            audioManager.PlaySFX("ButtonClick");
             gameManager.player.GetComponent<Player>().activeWeapon = weaponDictionary.playerWeaponsDict[gameObject.name];
         }
     }

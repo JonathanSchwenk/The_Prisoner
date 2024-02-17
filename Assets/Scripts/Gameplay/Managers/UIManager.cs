@@ -12,9 +12,11 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject instructionsCanvas;
 
     private IGameManager gameManager; // GameManager and ServiceManager must be executed first
+    private IAudioManager audioManager;
 
     void Awake() {
         gameManager = ServiceLocator.Resolve<IGameManager>();
+        audioManager = ServiceLocator.Resolve<IAudioManager>();
 
         // Subscribes to gamemanagers actions
         if (gameManager != null) {
@@ -75,6 +77,7 @@ public class UIManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
+            audioManager.PlaySFX("PauseInstructions");
             if (gameManager.State == GameState.Playing && gameManager.State != GameState.Doors || gameManager.State == GameState.GameOver) {
                 gameManager.UpdateGameState(GameState.Idle);
             } else if (gameManager.State == GameState.Idle && gameManager.State != GameState.Doors || gameManager.State == GameState.GameOver) {
@@ -83,6 +86,7 @@ public class UIManager : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.I)) {
+            audioManager.PlaySFX("PauseInstructions");
             if (gameManager.State == GameState.Idle) {
                 if (instructionsCanvas.activeSelf) {
                     instructionsCanvas.SetActive(false);
