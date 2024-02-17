@@ -6,7 +6,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SaveData 
 {
-    public int coins = 0;
+    public int bestRound = 0;
     public bool SFXOn = true;
     public bool musicOn = true;
 }

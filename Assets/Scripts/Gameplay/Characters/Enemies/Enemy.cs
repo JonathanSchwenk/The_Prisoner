@@ -41,7 +41,9 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        if (gameManager.State == GameState.GameOver) {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other) {

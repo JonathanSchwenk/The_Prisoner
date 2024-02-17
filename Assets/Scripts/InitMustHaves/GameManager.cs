@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour, IGameManager {
             case GameState.GameOver:
                 player.SetActive(true);
                 doors.SetActive(false);
+
+                if (saveManager.saveData.bestRound < RoundNum) {
+                    saveManager.saveData.bestRound = RoundNum;
+                    saveManager.Save();
+                }
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);

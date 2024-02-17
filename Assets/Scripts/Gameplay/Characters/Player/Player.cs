@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject playerWeaponList;
 
     private IStatsManager statsManager;
+    private ISaveManager saveManager;
+    private IGameManager gameManager;
 
     public float health {get; set;}
     public Weapon activeWeapon {get; set;}
@@ -25,6 +27,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         statsManager = ServiceLocator.Resolve<IStatsManager>();
+        saveManager = ServiceLocator.Resolve<ISaveManager>();
+        gameManager = ServiceLocator.Resolve<IGameManager>();
+
         maxHealth = 100;
 
         activeWeapon = weaponDictionary.playerWeaponsDict["Long Sword"];
@@ -72,11 +77,14 @@ public class Player : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        print("Player hit by: " + other.gameObject.tag);
+        // print("Player hit by: " + other.gameObject.tag);
         if (other.gameObject.tag == "Enemy_Weapon") {
             health -= statsManager.enemyAttackDamage;
             timeToWaitBeforeRecoveryCounter = 0;
             // print("Player health: " + health);
+            if (health <= 0) {
+                gameManager.UpdateGameState(GameState.GameOver);
+            }
         }
     }
 }

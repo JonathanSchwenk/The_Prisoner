@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour {
     private float spawnDelayCounter;
     private float spawnDelayRate;
 
-    private int maxEnemies; // Max enemies at once
+    private int maxEnemies = 25; // Max enemies at once
 
     // Start is called before the first frame update
     void Start() {
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour {
 
         spawnDelayCounter = 0;
 
-        maxEnemies = statsManager.maxEnemies;
+        // maxEnemies = statsManager.maxEnemies;
     }
 
     // Update is called once per frame
