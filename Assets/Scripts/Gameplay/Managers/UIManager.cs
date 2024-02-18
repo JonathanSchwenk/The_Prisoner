@@ -111,5 +111,20 @@ public class UIManager : MonoBehaviour {
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            if (gameManager.State == GameState.Playing && gameManager.State != GameState.Doors || gameManager.State == GameState.GameOver) {
+                gameManager.UpdateGameState(GameState.Idle);
+            } else if (gameManager.State == GameState.Idle && gameManager.State != GameState.Doors || gameManager.State == GameState.GameOver) {
+                gameManager.UpdateGameState(GameState.Playing);
+            }
+        }
+    }
+
+    public void Quit() {
+        Application.Quit();
     }
 }
