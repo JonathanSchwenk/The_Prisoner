@@ -27,13 +27,13 @@ public class StatsManager : MonoBehaviour, IStatsManager {
 
     // Start is called before the first frame update
     void Start() {
-        enemySpeed = enemySpeedLocal;
-        playerSpeed = playerSpeedLocal;
-        enemyAttackRange = enemyAttackRangeLocal;
-        enemyAttackDamage = enemyAttackDamageLocal;
-        bankCap = bankCapLocal;
-        maxEnemies = maxEnemiesLocal;
-        enemyHealth = enemyHealthLocal;
+        enemySpeed = 3.5f;
+        playerSpeed = 5f;
+        enemyAttackRange = 4;
+        enemyAttackDamage = 5;
+        bankCap = 40;
+        maxEnemies = 25;
+        enemyHealth = 5;
 
         playerUnlockedWeapons = new Dictionary<string, Weapon> {
             {

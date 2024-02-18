@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour, IGameManager {
     private ISaveManager saveManager;
     private IAudioManager audioManager;
     private ISpawnManager spawnManager;
+    private IStatsManager statsManager;
 
 
     void OnDestroy() {
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour, IGameManager {
         saveManager = ServiceLocator.Resolve<ISaveManager>();
         audioManager = ServiceLocator.Resolve<IAudioManager>();
         spawnManager = ServiceLocator.Resolve<ISpawnManager>();
+        statsManager = ServiceLocator.Resolve<IStatsManager>();
 
         player = playerLocal;
 
@@ -81,6 +83,17 @@ public class GameManager : MonoBehaviour, IGameManager {
         RoundNum += 1;
         OnRoundChanged?.Invoke(RoundNum);
         // print("Updated round: " + RoundNum);
+
+        if (RoundNum > 10 && RoundNum <= 20) {
+            statsManager.enemyHealth = 10;
+        } else if (RoundNum > 20 && RoundNum <= 30) {
+            statsManager.enemyHealth = 15;
+        } else if (RoundNum > 30) {
+            statsManager.enemyHealth = 20;
+        } else {
+            statsManager.enemyHealth = 5;
+        
+        }
     }
 
 

@@ -85,8 +85,8 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag == "Enemy_Weapon") {
             audioManager.PlaySFX("PlayerTakeDamage");
 
-            // health -= statsManager.enemyAttackDamage;
-            health -= 20;
+            health -= statsManager.enemyAttackDamage;
+            // health -= 20;
             timeToWaitBeforeRecoveryCounter = 0;
             // print("Player health: " + health);
             if (health <= 0) {
