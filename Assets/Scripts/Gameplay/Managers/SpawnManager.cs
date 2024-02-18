@@ -79,7 +79,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
                 audioManager.PlaySFX("RoundWon");
                 
                 // print("Updated round no more enemies");
-                StartCoroutine(ChangeState(5.0f));
+                StartCoroutine(ChangeState(4.0f));
             }
         }
     }

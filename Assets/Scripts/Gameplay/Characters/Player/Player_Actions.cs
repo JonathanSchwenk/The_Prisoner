@@ -38,10 +38,10 @@ public class Player_Actions : MonoBehaviour {
         // Check for left mouse button click
         if (Input.GetMouseButtonDown(0)) // 0 is the button number for the left mouse button
         {
-            Attack();
-
-            StartCoroutine(DelaySound(0.25f));
-            // audioManager.PlaySFX("PlayerAttack");
+            if (gameManager.player.GetComponent<Player>().playerIsDead == false) {
+                Attack();
+                StartCoroutine(DelaySound(0.25f));
+            }
         }
     }
 

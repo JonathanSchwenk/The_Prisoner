@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Dorkbots.ServiceLocatorTools;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
     [SerializeField] private Player_Weapons weaponDictionary;
     [SerializeField] private GameObject playerWeaponList;
+    [SerializeField] private GameObject mainCamera;
+    [SerializeField] private GameObject deathCamera;
 
     private IStatsManager statsManager;
     private ISaveManager saveManager;
     private IGameManager gameManager;
     private IAudioManager audioManager;
 
-    public float health {get; set;}
-    public Weapon activeWeapon {get; set;}
-    public bool playerIsDead {get; private set;}
+    public float health { get; set; }
+    public Weapon activeWeapon { get; set; }
+    public bool playerIsDead { get; private set; }
 
-    public float maxHealth {get; private set;}
+    public float maxHealth { get; private set; }
 
     private float healthRecoveryRate;
     private float healthRecoveryCounter;
@@ -26,8 +27,7 @@ public class Player : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         statsManager = ServiceLocator.Resolve<IStatsManager>();
         saveManager = ServiceLocator.Resolve<ISaveManager>();
         gameManager = ServiceLocator.Resolve<IGameManager>();
@@ -39,17 +39,16 @@ public class Player : MonoBehaviour
         health = maxHealth;
 
         // Health recovery active timer init (1 is kinda fast, maybe try 2)
-        healthRecoveryRate = 0.1f; 
+        healthRecoveryRate = 0.1f;
         healthRecoveryCounter = healthRecoveryRate;
 
         // Health Recovery time to wait before you start getting health back (2 is a bit too fast, maybe try 4-5)
-        timeToWaitBeforeRecovery = 2.0f; 
+        timeToWaitBeforeRecovery = 2.0f;
         timeToWaitBeforeRecoveryCounter = 0.0f;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         // Bad practice and I should make an action for this subscribed to when the active weapon changes
         for (int i = 0; i < playerWeaponList.transform.childCount; i++) {
             if (playerWeaponList.transform.GetChild(i).name == activeWeapon.name) {
@@ -94,7 +93,10 @@ public class Player : MonoBehaviour
 
                 playerIsDead = true;
 
-                StartCoroutine(WaitForGameOver(4.0f));
+                mainCamera.SetActive(false);
+                deathCamera.SetActive(true);
+
+                StartCoroutine(WaitForGameOver(2.5f));
             }
         }
     }
@@ -104,6 +106,9 @@ public class Player : MonoBehaviour
         gameManager.UpdateGameState(GameState.GameOver);
         audioManager.PlaySFX("GameOver");
         playerIsDead = false;
+
+        mainCamera.SetActive(true);
+        deathCamera.SetActive(false);
     }
 
 }

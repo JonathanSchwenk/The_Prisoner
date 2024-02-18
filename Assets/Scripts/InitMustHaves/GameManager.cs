@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour, IGameManager {
 
     private ISaveManager saveManager;
     private IAudioManager audioManager;
+    private ISpawnManager spawnManager;
 
 
     void OnDestroy() {
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour, IGameManager {
     void Start() {
         saveManager = ServiceLocator.Resolve<ISaveManager>();
         audioManager = ServiceLocator.Resolve<IAudioManager>();
+        spawnManager = ServiceLocator.Resolve<ISpawnManager>();
 
         player = playerLocal;
 
@@ -57,6 +59,8 @@ public class GameManager : MonoBehaviour, IGameManager {
             case GameState.GameOver:
                 player.SetActive(true);
                 doors.SetActive(false);
+
+                spawnManager.numEnemies = 0;
 
                 if (saveManager.saveData.bestRound < RoundNum) {
                     saveManager.saveData.bestRound = RoundNum;

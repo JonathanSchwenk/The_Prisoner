@@ -9,14 +9,9 @@ public class Camera_Controls : MonoBehaviour {
     private float inputY;
 
     [SerializeField] private Transform player;
-    [SerializeField] private float mouseSensitivity = 15f;
+    [SerializeField] private float mouseSensitivity = 20f;
 
-    private float backupDuration = 2f;
-    private Vector3 backupPositionOffset = new Vector3(0, 5, -10);
-    private Vector3 backupRotation = new Vector3(45, 0, 0);
     private float cameraVerticalRotation = 0f;
-    private bool isBackingUp = false;
-    private float backupTimer = 0f;
 
     private bool lockedCursor = true;
 
@@ -43,37 +38,5 @@ public class Camera_Controls : MonoBehaviour {
 
         // Rotate the player around its y axis
         player.Rotate(Vector3.up * inputX);
-
-
-        if (isBackingUp) {
-            BackupCamera();
-        }
-    }
-
-
-    public void TriggerCameraBackup() {
-        isBackingUp = true;
-        backupTimer = 0f;
-    }
-
-    private void BackupCamera() {
-        backupTimer += Time.deltaTime;
-        float fraction = backupTimer / backupDuration;
-
-        // Interpolate position
-        Vector3 targetPosition = player.position + backupPositionOffset;
-        transform.position = Vector3.Lerp(transform.position, targetPosition, fraction);
-
-        // Interpolate rotation
-        Quaternion targetRotation = Quaternion.Euler(backupRotation);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fraction);
-
-        if (backupTimer >= backupDuration) {
-            isBackingUp = false;
-        }
-    }
-
-    private void BackUpCam() {
-        TriggerCameraBackup();
     }
 }
