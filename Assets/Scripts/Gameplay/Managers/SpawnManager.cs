@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using Dorkbots.ServiceLocatorTools;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour, ISpawnManager
-{
-    public string enemyToSpawn {get; set;} // This gets set by doors
-    public int numEnemies {get; set;}
-    public int bankValue {get; set;}
-    public bool canSpawn {get; set;}
+public class SpawnManager : MonoBehaviour, ISpawnManager {
+    public string enemyToSpawn { get; set; } // This gets set by doors
+    public int numEnemies { get; set; }
+    public int bankValue { get; set; }
+    public bool canSpawn { get; set; }
 
     private int bankCap = 40; // Max enemies for a level 
     private int mutliplier = 2;
@@ -42,7 +41,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
         gameManager.OnGameStateChanged -= GameManagerOnGameStateChanged;
     }
 
-    
+
     private void GameManagerOnRoundNumChanged(int newRoundNum) {
         bankValue = gameManager.RoundNum * mutliplier;
         // print("Updated round bankValue" + bankValue);
@@ -54,7 +53,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
         roundUpdated = false;
     }
 
-    private void GameManagerOnGameStateChanged(GameState state) { 
+    private void GameManagerOnGameStateChanged(GameState state) {
         if (state == GameState.Playing) {
             canSpawn = true;
         } else {
@@ -63,8 +62,7 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (gameManager.State == GameState.Playing) {
             canSpawn = true;
         } else {
@@ -73,13 +71,15 @@ public class SpawnManager : MonoBehaviour, ISpawnManager
 
         // print("bankValue: " + bankValue + " numEnemies: " + numEnemies);
         if (bankValue == 0 && numEnemies == 0) {
-            if (!roundUpdated) {
-                roundUpdated = true;
+            if (gameManager.player.GetComponent<Player>().playerIsDead == false) {
+                if (!roundUpdated) {
+                    roundUpdated = true;
 
-                audioManager.PlaySFX("RoundWon");
-                
-                // print("Updated round no more enemies");
-                StartCoroutine(ChangeState(4.0f));
+                    audioManager.PlaySFX("RoundWon");
+
+                    // print("Updated round no more enemies");
+                    StartCoroutine(ChangeState(4.0f));
+                }
             }
         }
     }

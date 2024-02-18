@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
 
     public float health { get; set; }
     public Weapon activeWeapon { get; set; }
-    public bool playerIsDead { get; private set; }
+    public bool playerIsDead { get; set; }
 
     public float maxHealth { get; private set; }
 
@@ -45,6 +45,8 @@ public class Player : MonoBehaviour {
         // Health Recovery time to wait before you start getting health back (2 is a bit too fast, maybe try 4-5)
         timeToWaitBeforeRecovery = 2.0f;
         timeToWaitBeforeRecoveryCounter = 0.0f;
+
+        playerIsDead = false;
     }
 
     // Update is called once per frame
@@ -105,7 +107,6 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(time);
         gameManager.UpdateGameState(GameState.GameOver);
         audioManager.PlaySFX("GameOver");
-        playerIsDead = false;
 
         mainCamera.SetActive(true);
         deathCamera.SetActive(false);

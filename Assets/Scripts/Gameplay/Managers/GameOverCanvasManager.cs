@@ -15,6 +15,7 @@ public class GameOverCanvasManager : MonoBehaviour
     private IGameManager gameManager;
     private IStatsManager statsManager;
     private IAudioManager audioManager;
+    private ISpawnManager spawnManager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class GameOverCanvasManager : MonoBehaviour
         saveManager = ServiceLocator.Resolve<ISaveManager>();
         statsManager = ServiceLocator.Resolve<IStatsManager>();
         audioManager = ServiceLocator.Resolve<IAudioManager>();
+        spawnManager = ServiceLocator.Resolve<ISpawnManager>();
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class GameOverCanvasManager : MonoBehaviour
         audioManager.PlaySFX("ButtonClick");
 
         gameManager.RoundNum = 0;
-        gameManager.UpdateRound();
+        // gameManager.UpdateRound();
 
         statsManager.playerUnlockedWeapons = new Dictionary<string, Weapon> {
             {
@@ -53,6 +55,9 @@ public class GameOverCanvasManager : MonoBehaviour
 
         gameManager.player.GetComponent<Player>().activeWeapon = statsManager.playerUnlockedWeapons["Long Sword"];
         gameManager.player.GetComponent<Player>().health = gameManager.player.GetComponent<Player>().maxHealth;
+        gameManager.player.GetComponent<Player>().playerIsDead = false;
+
+        spawnManager.numEnemies = 0;
     }
 
     public void Menu() {

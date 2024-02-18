@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour, IGameManager {
             case GameState.Playing:
                 player.SetActive(true);
                 doors.SetActive(false);
+
+                player.GetComponent<Player_Actions>().StopAttack();
                 break;
             case GameState.GameOver:
                 player.SetActive(true);
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviour, IGameManager {
     public void UpdateRound() {
         RoundNum += 1;
         OnRoundChanged?.Invoke(RoundNum);
+        // print("Updated round: " + RoundNum);
     }
 
 

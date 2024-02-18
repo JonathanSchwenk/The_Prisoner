@@ -96,6 +96,7 @@ public class DoorManager : MonoBehaviour, IDoorManager {
         if (hasSpawned == false) {
             // Pick what to spawn
             bool spawnWeapon = Random.Range(0f, 1f) < 0.75f; // 75% chance
+            // bool spawnWeapon = Random.Range(0f, 1f) > 5f; // 50% chance
 
             if (spawnWeapon) {
                 // Spawn one weapon and two enemies
@@ -121,6 +122,10 @@ public class DoorManager : MonoBehaviour, IDoorManager {
                     doorList[i].GetComponent<DoorSpawner>().SpawnBehindDoor(randomEnemy);
 
                     doorContents[i] = randomEnemy;
+                    // Weapon weapon = GetRandomEntryFromDictionary(weaponDictionary.playerWeaponsDict).Value;
+                    // doorList[i].GetComponent<DoorSpawner>().SpawnBehindDoor(weapon.name);
+
+                    // doorContents[i] = weapon.name;
                 }
             }
         }
@@ -205,6 +210,7 @@ public class DoorManager : MonoBehaviour, IDoorManager {
 
             // Reset player position
             gameManager.player.transform.position = new Vector3(0, 0, 0);
+
             // Tell the game manager to update the game state
             gameManager.UpdateGameState(GameState.Playing);
         } else {
@@ -212,7 +218,9 @@ public class DoorManager : MonoBehaviour, IDoorManager {
                 statsManager.playerUnlockedWeapons.Add(weaponDictionary.playerWeaponsDict[chosenObject].name, weaponDictionary.playerWeaponsDict[chosenObject]);
             }
 
-            // Could increase round number
+            //Resets players animations
+            // gameManager.player.GetComponent<Player_Actions>().StopAttack();
+            // gameManager.player.GetComponent<Player_Actions>().stopAnimation = true;
         }
 
     }

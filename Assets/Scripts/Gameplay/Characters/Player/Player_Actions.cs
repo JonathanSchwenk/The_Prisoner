@@ -10,6 +10,8 @@ public class Player_Actions : MonoBehaviour {
     private IGameManager gameManager;
     private IAudioManager audioManager;
 
+    public bool stopAnimation = false;
+
 
     private void GameManagerOnRoundNumChanged(int newRoundNum) {
         if (gameObject.activeSelf) {
@@ -43,6 +45,10 @@ public class Player_Actions : MonoBehaviour {
                 StartCoroutine(DelaySound(0.25f));
             }
         }
+        if (stopAnimation) {
+            StopAttack();
+            stopAnimation = false;
+        }
     }
 
     private void Attack() {
@@ -63,6 +69,14 @@ public class Player_Actions : MonoBehaviour {
             animator.SetInteger("MeleeType_int", 0);
             StartCoroutine(StopAnimation(0.8f));
         }
+    }
+
+    public void StopAttack() {
+        // Stop attack animation or logic
+        animator.SetInteger("WeaponType_int", 0);
+        animator.SetInteger("MeleeType_int", 0);
+        print("Stop Attack");
+        // StopAnimation(2.8f);
     }
 
     IEnumerator StopAnimation(float time) {
