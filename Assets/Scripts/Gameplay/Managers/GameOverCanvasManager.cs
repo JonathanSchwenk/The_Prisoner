@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Dorkbots.ServiceLocatorTools;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameOverCanvasManager : MonoBehaviour
 {
@@ -52,5 +53,9 @@ public class GameOverCanvasManager : MonoBehaviour
 
         gameManager.player.GetComponent<Player>().activeWeapon = statsManager.playerUnlockedWeapons["Long Sword"];
         gameManager.player.GetComponent<Player>().health = gameManager.player.GetComponent<Player>().maxHealth;
+    }
+
+    public void Menu() {
+        SceneManager.LoadScene("Menu");
     }
 }
